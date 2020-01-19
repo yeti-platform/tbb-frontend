@@ -26,6 +26,5 @@ yarn-error.log*
 # Coverage directories
 coverage
 
-
 # Node modules
 node_modules
