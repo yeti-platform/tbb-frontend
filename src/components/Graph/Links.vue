@@ -3,7 +3,7 @@
     <ul class="nav nav-pills mb-3 float-left" role="tablist">
       <li class="nav-item" v-bind:key="linkType" v-for="(linkType, index) in linkTypes">
         <a class="nav-link" v-bind:class="{active: index === 0}" :id="linkType + '-tab'" data-toggle="tab" :href="'#'+linkType" role="tab" :aria-controls="linkType" aria-selected="true">
-          <type-to-icon :type="linkType"></type-to-icon> {{entityType(linkType).plural}}
+          <type-to-icon :type="linkType"></type-to-icon> {{objectType(linkType).plural}}
           <span class="badge badge-pill badge-light ml-2"> {{getFilterEdges(linkType).length}}</span>
         </a>
       </li>
@@ -34,7 +34,7 @@
               >
               <td class="show-on-hover"><a href="#" @click="$refs.deleteLinks.deleteLinks([edge.id])"><i class="fas fa-unlink"></i></a></td>
               <td class="incoming-vertice">
-                <router-link :to="{ name: detailComponent, params: {id: getIncomingVertice(graph, edge).id}}">
+                <router-link :to="{ name: entityComponent(getIncomingVertice(graph, edge)), params: {id: getIncomingVertice(graph, edge).id}}">
                   <type-to-icon :type="getIncomingVertice(graph, edge).type"></type-to-icon>{{getIncomingVertice(graph, edge).name}}
                 </router-link>
                 <neighbor-icons v-if="getIncomingVertice(graph, edge).id !== object.id"
@@ -46,7 +46,7 @@
               <td>{{edge.relationship_type}}</td>
               <td>&rarr;</td>
               <td class="outgoing-vertice">
-                <router-link :to="{ name: '', params: {id: getOutgoingVertice(graph, edge).id} }">
+                <router-link :to="{ name: entityComponent(getOutgoingVertice(graph, edge)), params: {id: getOutgoingVertice(graph, edge).id} }">
                   <type-to-icon :type="getOutgoingVertice(graph, edge).type"></type-to-icon>{{getOutgoingVertice(graph, edge).name}}
                 </router-link>
                 <neighbor-icons v-if="getOutgoingVertice(graph, edge).id !== object.id"
@@ -78,6 +78,7 @@ import NewLink from '@/components/Graph/NewLink'
 import DeleteLinks from '@/components/Graph/DeleteLinks'
 import EditLinks from '@/components/Graph/EditLinks'
 import { entityTypes } from '@/components/Entities/EntityTypes.js'
+import { indicatorTypes } from '@/components/Indicators/IndicatorTypes.js'
 import NeighborIcons from '@/components/Graph/NeighborIcons'
 
 export default {
@@ -107,8 +108,11 @@ export default {
     }
   },
   methods: {
-    entityType (type) {
-      return entityTypes[type]
+    objectType (type) {
+      return entityTypes[type] || indicatorTypes[type]
+    },
+    entityComponent (entity) {
+      return entityTypes[entity.type] ? 'EntityDetails' : 'IndicatorDetails'
     },
     fetchNeighbors () {
       console.log('fetching neighbors for ' + this.object.id)
