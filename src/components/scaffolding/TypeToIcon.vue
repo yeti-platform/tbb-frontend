@@ -16,7 +16,8 @@ const typeToIcon = {
   'vulnerability': 'fa-bolt',
   'campaign': 'fa-fighter-jet',
   'course-of-action': 'fa-medkit',
-  'identity': 'fa-id-card'
+  'identity': 'fa-id-card',
+  'x-incident': 'fa-fire'
 }
 
 export default {

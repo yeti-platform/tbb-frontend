@@ -80,6 +80,12 @@ export const editFields = {
     { name: 'name', type: 'text', humanName: 'Name' },
     { name: 'labels', type: 'list', humanName: 'Labels' },
     { name: 'description', type: 'longtext', humanName: 'Description' }
+  ],
+  'x-incident': [
+    { name: 'name', type: 'text', humanName: 'Name' },
+    { name: 'labels', type: 'list', humanName: 'Labels' },
+    { name: 'description', type: 'longtext', humanName: 'Description' },
+    { name: 'internal_references', type: 'list', humanName: 'Internal references' }
   ]
 }
 
@@ -146,6 +152,11 @@ export const listFields = {
   'vulnerability': [
     { name: 'name', type: 'text', humanName: 'Name' },
     { name: 'labels', type: 'list', humanName: 'Labels' }
+  ],
+  'x-incident': [
+    { name: 'name', type: 'text', humanName: 'Name' },
+    { name: 'labels', type: 'list', humanName: 'Labels' },
+    { name: 'internal_references', type: 'list', humanName: 'Internal references' }
   ]
 }
 
@@ -179,6 +190,9 @@ export const defaultObjects = {
   },
   'identity': {
     type: 'identity'
+  },
+  'x-incident': {
+    type: 'x-incident'
   }
   // No definition for observed-data since we're not currently supporting
   // manual creation.

@@ -58,6 +58,17 @@
       </ul>
 
       <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+        <span>Operations</span>
+      </h6>
+      <ul class="nav flex-column mb-2">
+        <li class="nav-item">
+          <router-link class="nav-link" :to="{name: 'EntityList', params: {type: 'x-incident'}}">
+            <i class="fas fa-fw fa-lg fa-fire"></i>Incidents
+          </router-link>
+        </li>
+      </ul>
+
+      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
         <span>Indicators</span>
       </h6>
       <ul class="nav flex-column mb-2">

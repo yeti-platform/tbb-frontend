@@ -38,5 +38,9 @@ export const entityTypes = {
   'vulnerability': {
     'plural': 'Vulnerabilities',
     'singular': 'Vulnerability'
+  },
+  'x-incident': {
+    'plural': 'Incidents',
+    'singular': 'Incident'
   }
 }
