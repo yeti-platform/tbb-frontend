@@ -57,6 +57,7 @@ import YetiVocabInput from '@/components/scaffolding/YetiVocabInput'
 import YetiTextInput from '@/components/scaffolding/YetiTextInput'
 import YetiKillchainInput from '@/components/scaffolding/YetiKillchainInput'
 import Datepicker from 'vuejs-datepicker'
+var moment = require('moment')
 
 export default {
   components: {
@@ -81,6 +82,9 @@ export default {
         .then(response => {
           this.availableKillchains = response.data
         })
+    },
+    customFormatter (date) {
+      return moment(date).format('YYYY-MM-DD HH:mm:ss ZZ')
     }
   },
   computed: {
