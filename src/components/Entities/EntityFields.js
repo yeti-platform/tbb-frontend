@@ -162,36 +162,94 @@ export const listFields = {
 
 export const defaultObjects = {
   'malware': {
+    name: '',
+    labels: [],
+    description: '',
     type: 'malware'
   },
   'threat-actor': {
+    name: '',
+    labels: '',
+    description: '',
+    aliases: [],
+    roles: [],
+    goals: [],
+    sophistication: '',
+    resource_level: '',
+    primary_motivation: '',
+    secondary_motivations: [],
+    personal_motivations: [],
     type: 'threat-actor'
   },
   'report': {
+    name: '',
+    labels: [],
+    description: '',
+    published: '',
     type: 'report'
   },
   'attack-pattern': {
+    name: '',
+    labels: [],
+    kill_chain_phases: [],
     type: 'attack-pattern'
   },
   'tool': {
+    name: '',
+    labels: [],
+    description: '',
+    tool_version: '',
+    kill_chain_phases: [],
     type: 'tool'
   },
   'intrusion-set': {
+    name: '',
+    labels: [],
+    description: '',
+    aliases: [],
+    first_seen: '',
+    last_seen: '',
+    goals: [],
+    resource_level: '',
+    primary_motivation: '',
+    secondary_motivations: [],
     type: 'intrusion-set'
   },
   'vulnerability': {
+    name: '',
+    labels: [],
+    description: '',
     type: 'vulnerability'
   },
   'campaign': {
+    name: '',
+    labels: [],
+    aliases: [],
+    first_seen: '',
+    last_seen: '',
+    objective: '',
     type: 'campaign'
   },
   'course-of-action': {
+    name: '',
+    labels: [],
+    description: '',
     type: 'course-of-action'
   },
   'identity': {
+    name: '',
+    labels: [],
+    description: '',
+    identity_class: '',
+    sectors: [],
+    contact_information: '',
     type: 'identity'
   },
   'x-incident': {
+    name: '',
+    labels: [],
+    description: '',
+    internal_references: [],
     type: 'x-incident'
   }
   // No definition for observed-data since we're not currently supporting
