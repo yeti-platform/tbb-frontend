@@ -32,7 +32,8 @@ export const editFields = {
     { name: 'description', type: 'longtext', humanName: 'Description' },
     { name: 'pattern', type: 'code', humanName: 'Sigma rule' },
     { name: 'valid_from', type: 'datetime', humanName: 'Valid from' },
-    { name: 'valid_until', type: 'datetime', humanName: 'Valid until' }
+    { name: 'valid_until', type: 'datetime', humanName: 'Valid until' },
+    { name: 'kill_chain_phases', type: 'killchain', humanName: 'Kill-chain stages' }
   ]
 }
 
@@ -61,15 +62,43 @@ export const listFields = {
 
 export const defaultObjects = {
   'indicator': {
+    name: '',
+    labels: [],
+    description: '',
+    pattern: '',
+    valid_from: '',
+    valid_until: '',
+    kill_chain_phases: [],
     type: 'indicator'
   },
   'x-regex': {
+    name: '',
+    labels: [],
+    description: '',
+    pattern: '',
+    valid_from: '',
+    valid_until: '',
+    kill_chain_phases: [],
     type: 'x-regex'
   },
   'x-yara': {
+    name: '',
+    labels: [],
+    description: '',
+    pattern: '',
+    valid_from: '',
+    valid_until: '',
+    kill_chain_phases: [],
     type: 'x-yara'
   },
   'x-sigma': {
+    name: '',
+    labels: [],
+    description: '',
+    pattern: '',
+    valid_from: '',
+    valid_until: '',
+    kill_chain_phases: [],
     type: 'x-sigma'
   }
 }
