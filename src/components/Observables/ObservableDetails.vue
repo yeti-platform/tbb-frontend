@@ -1,85 +1,94 @@
 <template>
   <!-- Display details nicely -->
   <div v-if="!isEdit" id="detail">
-    <div class='loading' v-if="loading">
-      <i class='fas fa-circle-notch fa-spin fa-3x m-3'></i>
+    <div class="loading" v-if="loading">
+      <i class="fas fa-circle-notch fa-spin fa-3x m-3"></i>
     </div>
     <div v-else>
-      <h3>{{observable.value}} <small>{{observable.type}}</small></h3>
-      {{observable.description || 'No description'}}
+      <h3>
+        {{ observable.value }} <small>{{ observable.type }}</small>
+      </h3>
+      {{ observable.description || "No description" }}
     </div>
-    <router-link class="edit btn-edit btn btn-sm btn-outline-secondary" :to="{name: 'ObservableEdit', params: {id: id}}">Edit</router-link>
+    <router-link
+      class="edit btn-edit btn btn-sm btn-outline-secondary"
+      :to="{ name: 'ObservableEdit', params: { id: id } }"
+      >Edit</router-link
+    >
   </div>
   <!--  Edit form -->
 
-  <yeti-form :object="observable"
-             :fields="observableFields"
-             :apiPath="defaultApiPath+id+'/'"
-             method='PUT'
-             v-on:form-submit='toggleEdit'
-             v-else
-             />
+  <yeti-form
+    :object="observable"
+    :fields="observableFields"
+    :apiPath="defaultApiPath + id + '/'"
+    method="PUT"
+    v-on:form-submit="toggleEdit"
+    v-else
+  />
 </template>
 
 <script>
-import axios from 'axios'
-import YetiForm from '@/components/scaffolding/YetiForm'
-import { listFields } from './ObservableFields.js'
+import axios from "axios";
+import YetiForm from "@/components/scaffolding/YetiForm";
+import { listFields } from "./ObservableFields.js";
 
 export default {
-  data () {
+  data() {
     return {
       loading: true,
       observable: {},
       error: {},
       defaultApiPath: `/observables/`
-    }
+    };
   },
   components: {
     YetiForm
   },
-  props: ['id'],
-  beforeRouteUpdate (to, from, next) {
-    this.fetchInfo()
-    next()
+  props: ["id"],
+  beforeRouteUpdate(to, from, next) {
+    this.fetchInfo();
+    next();
   },
   computed: {
-    isEdit () {
-      return this.$route.path.endsWith('edit')
+    isEdit() {
+      return this.$route.path.endsWith("edit");
     },
-    observableType () {
-      let arr = this.observable.type.split('.')
-      return arr[arr.length - 1]
+    observableType() {
+      let arr = this.observable.type.split(".");
+      return arr[arr.length - 1];
     },
-    observableFields () {
-      return listFields[this.observableType]
+    observableFields() {
+      return listFields[this.observableType];
     }
   },
   methods: {
-    fetchInfo () {
-      axios.get(this.defaultApiPath + this.id)
+    fetchInfo() {
+      axios
+        .get(this.defaultApiPath + this.id)
         .then(response => {
           if (response.status !== 200) {
-            this.error = response.data
+            this.error = response.data;
           } else {
-            this.observable = response.data
+            this.observable = response.data;
           }
         })
         .catch(error => {
-          console.log(error)
-          this.error = error
+          console.log(error);
+          this.error = error;
         })
-        .finally(() => { this.loading = false })
+        .finally(() => {
+          this.loading = false;
+        });
     },
-    toggleEdit () {
-      this.$router.go(-1)
+    toggleEdit() {
+      this.$router.go(-1);
     }
   },
-  mounted () {
-    this.fetchInfo()
+  mounted() {
+    this.fetchInfo();
   }
-}
+};
 </script>
 
-<style lang="css">
-</style>
+<style lang="css"></style>

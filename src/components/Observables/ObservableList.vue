@@ -3,24 +3,24 @@
 </template>
 
 <script>
-import TableFilter from '@/components/scaffolding/TableFilter'
+import TableFilter from "@/components/scaffolding/TableFilter";
 
 export default {
   components: {
     TableFilter
   },
-  props: ['id'],
-  data () {
+  props: ["id"],
+  data() {
     return {
       filterParams: {
         apiPath: `/observables/filter/`,
         fields: [
-          { name: 'value', type: 'text' },
-          { name: 'tags', type: 'tags' }
+          { name: "value", type: "text" },
+          { name: "tags", type: "tags" }
         ],
-        queryKey: 'value'
+        queryKey: "value"
       }
-    }
+    };
   }
-}
+};
 </script>

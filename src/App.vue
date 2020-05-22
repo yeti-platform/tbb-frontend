@@ -7,9 +7,10 @@
         <!-- sidebar column -->
         <sidebar />
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-          <router-view/>
+          <router-view />
         </main>
-      </div> <!-- end row -->
+      </div>
+      <!-- end row -->
       <div v-else>
         <log-in />
       </div>
@@ -18,15 +19,15 @@
 </template>
 
 <script>
-import Sidebar from '@/components/scaffolding/Sidebar'
-import Navigation from '@/components/scaffolding/Navigation'
-import LogIn from '@/components/LogIn'
-import axios from 'axios'
-axios.defaults.baseURL = '/api'
+import Sidebar from "@/components/scaffolding/Sidebar";
+import Navigation from "@/components/scaffolding/Navigation";
+import LogIn from "@/components/LogIn";
+import axios from "axios";
+axios.defaults.baseURL = "/api";
 
-require('bootstrap')
-require('bootstrap/dist/css/bootstrap.css')
-require('@fortawesome/fontawesome-free/js/all.js')
+require("bootstrap");
+require("bootstrap/dist/css/bootstrap.css");
+require("@fortawesome/fontawesome-free/js/all.js");
 
 export default {
   components: {
@@ -34,40 +35,37 @@ export default {
     Navigation,
     LogIn
   },
-  name: 'App',
+  name: "App",
   metaInfo: {
-    title: 'Yeti',
-    titleTempalte: 'Yeti | %s',
+    title: "Yeti",
+    titleTempalte: "Yeti | %s",
     htmlAttrs: {
-      lang: 'en'
+      lang: "en"
     },
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no' }
-    ]
+    meta: [{ charset: "utf-8" }, { name: "viewport", content: "width=device-width, initial-scale=1, shrink-to-fit=no" }]
   },
   computed: {
-    isAuthenticated () {
-      return this.$store.getters.isAuthenticated
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated;
     }
   },
-  created () {
-    let component = this
-    axios.interceptors.response.use(undefined, function (error) {
-      if (error.response.status === 401 && !error.request.responseURL.includes('/api/users/login/')) {
-        component.$store.dispatch('logout').then(() => {
-          component.$router.push('/login')
-        })
+  created() {
+    let component = this;
+    axios.interceptors.response.use(undefined, function(error) {
+      if (error.response.status === 401 && !error.request.responseURL.includes("/api/users/login/")) {
+        component.$store.dispatch("logout").then(() => {
+          component.$router.push("/login");
+        });
       }
-      return Promise.reject(error)
-    })
+      return Promise.reject(error);
+    });
   }
-}
+};
 </script>
 
 <style>
 body {
-  font-size: .875rem;
+  font-size: 0.875rem;
 }
 
 .feather {
@@ -76,17 +74,21 @@ body {
   vertical-align: text-bottom;
 }
 
-.border-top { border-top: 1px solid #e5e5e5; }
-.border-bottom { border-bottom: 1px solid #e5e5e5; }
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
 
-.nav-pills .nav-link.router-link-active, .nav-pills .show > .nav-link {
-    color: #fff;
-    background-color: #007bff;
+.nav-pills .nav-link.router-link-active,
+.nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #007bff;
 }
 
 h1.yeti-title {
   font-weight: 300;
   font-size: 3rem;
 }
-
 </style>

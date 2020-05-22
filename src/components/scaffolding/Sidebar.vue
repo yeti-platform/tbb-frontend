@@ -6,52 +6,52 @@
       </h6>
       <ul class="nav flex-column">
         <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'EntityList', params: {type: 'attack-pattern'}}">
+          <router-link class="nav-link" :to="{ name: 'EntityList', params: { type: 'attack-pattern' } }">
             <i class="fas fa-fw fa-lg fa-gamepad"></i>Attack Patterns (TTPs)
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'EntityList', params: {type: 'campaign'}}">
+          <router-link class="nav-link" :to="{ name: 'EntityList', params: { type: 'campaign' } }">
             <i class="fas fa-fw fa-lg fa-fighter-jet"></i>Campaigns
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'EntityList', params: {type: 'course-of-action'}}">
+          <router-link class="nav-link" :to="{ name: 'EntityList', params: { type: 'course-of-action' } }">
             <i class="fas fa-fw fa-lg fa-medkit"></i>Courses of action
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'EntityList', params: {type: 'identity'}}">
+          <router-link class="nav-link" :to="{ name: 'EntityList', params: { type: 'identity' } }">
             <i class="fas fa-fw fa-lg fa-id-card"></i>Identities
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'EntityList', params: {type: 'intrusion-set'}}">
-          <i class="fas fa-fw fa-lg fa-umbrella"></i>Intrusion sets
+          <router-link class="nav-link" :to="{ name: 'EntityList', params: { type: 'intrusion-set' } }">
+            <i class="fas fa-fw fa-lg fa-umbrella"></i>Intrusion sets
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'EntityList', params: {type: 'malware'}}">
+          <router-link class="nav-link" :to="{ name: 'EntityList', params: { type: 'malware' } }">
             <i class="fas fa-fw fa-lg fa-bug"></i>Malware
           </router-link>
         </li>
-         <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'EntityList', params: {type: 'report'}}">
+        <li class="nav-item">
+          <router-link class="nav-link" :to="{ name: 'EntityList', params: { type: 'report' } }">
             <i class="far fa-fw fa-lg fa-newspaper"></i>Reports
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'EntityList', params: {type: 'threat-actor'}}">
+          <router-link class="nav-link" :to="{ name: 'EntityList', params: { type: 'threat-actor' } }">
             <i class="fas fa-fw fa-lg fa-user-secret"></i>Threat actors
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'EntityList', params: {type: 'tool'}}">
+          <router-link class="nav-link" :to="{ name: 'EntityList', params: { type: 'tool' } }">
             <i class="fas fa-fw fa-lg fa-wrench"></i>Tools
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'EntityList', params: {type: 'vulnerability'}}">
+          <router-link class="nav-link" :to="{ name: 'EntityList', params: { type: 'vulnerability' } }">
             <i class="fas fa-fw fa-lg fa-bolt"></i>Vulnerabilities
           </router-link>
         </li>
@@ -62,7 +62,7 @@
       </h6>
       <ul class="nav flex-column mb-2">
         <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'EntityList', params: {type: 'x-incident'}}">
+          <router-link class="nav-link" :to="{ name: 'EntityList', params: { type: 'x-incident' } }">
             <i class="fas fa-fw fa-lg fa-fire"></i>Incidents
           </router-link>
         </li>
@@ -73,22 +73,22 @@
       </h6>
       <ul class="nav flex-column mb-2">
         <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'IndicatorList', params: {type: 'indicator'}}">
+          <router-link class="nav-link" :to="{ name: 'IndicatorList', params: { type: 'indicator' } }">
             <i class="fas fa-fw fa-lg fa-bolt"></i>STIX Indicators
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'IndicatorList', params: {type: 'x-regex'}}">
+          <router-link class="nav-link" :to="{ name: 'IndicatorList', params: { type: 'x-regex' } }">
             <i class="fas fa-fw fa-lg fa-bolt"></i>Regular expressions
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'IndicatorList', params: {type: 'x-yara'}}">
+          <router-link class="nav-link" :to="{ name: 'IndicatorList', params: { type: 'x-yara' } }">
             <i class="fas fa-fw fa-lg fa-bolt"></i>Yara rules
           </router-link>
         </li>
-                <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'IndicatorList', params: {type: 'x-sigma'}}">
+        <li class="nav-item">
+          <router-link class="nav-link" :to="{ name: 'IndicatorList', params: { type: 'x-sigma' } }">
             <i class="fas fa-fw fa-lg fa-bolt"></i>Sigma rules
           </router-link>
         </li>
@@ -99,12 +99,12 @@
       </h6>
       <ul class="nav flex-column mb-2">
         <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'ObservableList'}">
+          <router-link class="nav-link" :to="{ name: 'ObservableList' }">
             <i class="fas fa-fw fa-lg fa-search"></i>Browse observables
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'ObservablesBulk'}">
+          <router-link class="nav-link" :to="{ name: 'ObservablesBulk' }">
             <i class="fas fa-fw fa-lg fa-archive"></i>Bulk observable match
           </router-link>
         </li>
@@ -114,12 +114,10 @@
 </template>
 
 <script>
-export default {
-}
+export default {};
 </script>
 
 <style lang="css">
-
 /*
  * Sidebar
  */
@@ -131,7 +129,7 @@ export default {
   left: 0;
   z-index: 100; /* Behind the navbar */
   padding: 0;
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-sticky {
@@ -139,7 +137,7 @@ export default {
   position: sticky;
   top: 48px; /* Height of navbar */
   height: calc(100vh - 48px);
-  padding-top: .5rem;
+  padding-top: 0.5rem;
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
@@ -164,12 +162,11 @@ export default {
 }
 
 .sidebar-heading {
-  font-size: .75rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
 }
 
 a svg {
   margin-right: 5px;
 }
-
 </style>

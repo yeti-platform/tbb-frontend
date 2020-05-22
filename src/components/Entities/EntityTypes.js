@@ -1,46 +1,46 @@
 export const entityTypes = {
-  'attack-pattern': {
-    'plural': 'Attack patterns (TTPs)',
-    'singular': 'Attack pattern (TTP)'
+  "attack-pattern": {
+    plural: "Attack patterns (TTPs)",
+    singular: "Attack pattern (TTP)"
   },
-  'campaign': {
-    'plural': 'Campaigns',
-    'singular': 'Campaign'
+  campaign: {
+    plural: "Campaigns",
+    singular: "Campaign"
   },
-  'course-of-action': {
-    'plural': 'Courses of action',
-    'singular': 'Course of action'
+  "course-of-action": {
+    plural: "Courses of action",
+    singular: "Course of action"
   },
-  'identity': {
-    'plural': 'Identities',
-    'singular': 'Identity'
+  identity: {
+    plural: "Identities",
+    singular: "Identity"
   },
-  'intrusion-set': {
-    'plural': 'Intrusion sets',
-    'singular': 'Intrusion set'
+  "intrusion-set": {
+    plural: "Intrusion sets",
+    singular: "Intrusion set"
   },
-  'malware': {
-    'plural': 'Malware',
-    'singular': 'Malware'
+  malware: {
+    plural: "Malware",
+    singular: "Malware"
   },
-  'report': {
-    'plural': 'Reports',
-    'singular': 'Report'
+  report: {
+    plural: "Reports",
+    singular: "Report"
   },
-  'threat-actor': {
-    'plural': 'Actors',
-    'singular': 'Actor'
+  "threat-actor": {
+    plural: "Actors",
+    singular: "Actor"
   },
-  'tool': {
-    'plural': 'Tools',
-    'singular': 'Tool'
+  tool: {
+    plural: "Tools",
+    singular: "Tool"
   },
-  'vulnerability': {
-    'plural': 'Vulnerabilities',
-    'singular': 'Vulnerability'
+  vulnerability: {
+    plural: "Vulnerabilities",
+    singular: "Vulnerability"
   },
-  'x-incident': {
-    'plural': 'Incidents',
-    'singular': 'Incident'
+  "x-incident": {
+    plural: "Incidents",
+    singular: "Incident"
   }
-}
+};
