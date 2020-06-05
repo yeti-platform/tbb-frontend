@@ -176,7 +176,33 @@ export const routes = [
   }
 ];
 
-export default new Router({
+let router = new Router({
   routes: routes,
   mode: "history"
 });
+
+import store from "@/store";
+router.beforeEach((to, from, next) => {
+  if (to.name == "LogIn") {
+    next();
+  }
+  if (store.state.user === null) {
+    store
+      .dispatch("refresh")
+      .then(() => {
+        console.log("redirecting to " + to.fullPath);
+        next({ path: to.fullPath });
+      })
+      .catch(() => {
+        console.log("redirecting to /login");
+        next({
+          path: "/login",
+          params: { nextUrl: to.fullPath }
+        });
+      });
+  } else {
+    next();
+  }
+});
+
+export default router;

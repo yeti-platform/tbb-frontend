@@ -48,17 +48,6 @@ export default {
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
     }
-  },
-  created() {
-    let component = this;
-    axios.interceptors.response.use(undefined, function(error) {
-      if (error.response.status === 401 && !error.request.responseURL.includes("/api/users/login/")) {
-        component.$store.dispatch("logout").then(() => {
-          component.$router.push("/login");
-        });
-      }
-      return Promise.reject(error);
-    });
   }
 };
 </script>
