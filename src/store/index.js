@@ -13,7 +13,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       commit("authRequest");
       axios
-        .post("/users/login/", params)
+        .post("/auth/login/", params)
         .then(response => {
           commit("authSuccess", response.data);
           resolve(response);
@@ -26,7 +26,7 @@ const actions = {
   },
   logout({ commit }) {
     return new Promise(resolve => {
-      axios.put(`/users/logout/`).then(response => {
+      axios.put(`/auth/logout/`).then(response => {
         resolve(response);
         commit("logout");
       });
@@ -35,7 +35,7 @@ const actions = {
   refresh({ commit }) {
     return new Promise((resolve, reject) => {
       axios
-        .get(`/users/me`)
+        .get(`/auth/me`)
         .then(response => {
           console.log("Session refresh success");
           commit("authSuccess", response.data);
