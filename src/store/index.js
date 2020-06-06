@@ -9,14 +9,32 @@ const state = {
 };
 
 const actions = {
-  login({ commit }, params) {
+  login({ commit, dispatch }, params) {
     return new Promise((resolve, reject) => {
       commit("authRequest");
       axios
         .post("/auth/login/", params)
         .then(response => {
-          commit("authSuccess", response.data);
-          resolve(response);
+          if (response.data.authenticated === true) {
+            commit("authSuccess", response.data);
+            resolve(response);
+          } else {
+            var left = screen.width / 2 - 400 / 2;
+            var top = screen.height / 2 - 350 / 2;
+            var win = window.open(
+              response.data.redirect,
+              "Authentication",
+              `width=400,height=350,top=${top},left=${left}`
+            );
+            var loop = setInterval(function() {
+              if (win.closed) {
+                clearInterval(loop);
+                dispatch("refresh")
+                  .then(resolve(response))
+                  .catch(reject(response));
+              }
+            }, 500);
+          }
         })
         .catch(err => {
           commit("authError", err);
@@ -67,7 +85,7 @@ const mutations = {
 
 const getters = {
   isAuthenticated: state => !!state.user,
-  tokenSubject: state => state.user.email
+  tokenSubject: state => state.user.user
 };
 
 const store = new Vuex.Store({
