@@ -17,7 +17,7 @@
       <table id="table-filter" v-else class="table table-hover table-sm table-yeti">
         <thead>
           <tr>
-            <th v-bind:key="field['name']" v-for="field in filterParams.fields">{{ field["name"] }}</th>
+            <th v-bind:key="field['humanName']" v-for="field in filterParams.fields">{{ field["humanName"] }}</th>
           </tr>
         </thead>
         <tbody>
