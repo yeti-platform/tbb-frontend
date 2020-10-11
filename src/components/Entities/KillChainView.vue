@@ -1,24 +1,26 @@
 <template>
   <div>
     <ul class="nav nav-tabs mb-3" id="tabs-tab" role="tablist">
-      <li class="nav-item" v-for="killchain in killchains" v-bind:key="killchain.name">
+      <li class="nav-item" v-for="(killchain, index) in nonEmptyKillChains" v-bind:key="killchain.name">
         <a
           class="nav-link"
           :id="killchain.name + '-tab'"
           data-toggle="pill"
           :href="'#' + killchain.name"
+          v-bind:class="{ active: index === 0 }"
           role="tab"
           :aria-controls="killchain.name"
           aria-selected="true"
-          >{{ killchain.name }}</a
+          >{{ killchain.human_name }}</a
         >
       </li>
     </ul>
     <div class="tab-content" id="pills-tabContent">
       <div
-        v-for="killchain in killchains"
+        v-for="(killchain, index) in nonEmptyKillChains"
         v-bind:key="killchain.name"
         class="tab-pane"
+        v-bind:class="{ active: index === 0 }"
         :id="killchain.name"
         role="tabpanel"
         :aria-labelledby="killchain.name + '-tab'"
@@ -118,6 +120,14 @@ export default {
           this.neighborsPerKillchain[phase.kill_chain_name][phase.phase_name].push(neighbor);
         });
       }
+    }
+  },
+  computed: {
+    nonEmptyKillChains() {
+      var neighbors = this.neighborsPerKillchain;
+      return this.killchains.filter(
+        item => Object.values(neighbors[item.name]).reduce((r, k) => r.concat(k)).length > 0
+      );
     }
   },
   mounted() {
