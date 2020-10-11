@@ -9,7 +9,7 @@ const state = {
 };
 
 const actions = {
-  login({ commit, dispatch }, params) {
+  login({ commit }, params) {
     return new Promise((resolve, reject) => {
       commit("authRequest");
       axios
@@ -19,21 +19,7 @@ const actions = {
             commit("authSuccess", response.data);
             resolve(response);
           } else {
-            var left = screen.width / 2 - 400 / 2;
-            var top = screen.height / 2 - 350 / 2;
-            var win = window.open(
-              response.data.redirect,
-              "Authentication",
-              `width=400,height=350,top=${top},left=${left}`
-            );
-            var loop = setInterval(function() {
-              if (win.closed) {
-                clearInterval(loop);
-                dispatch("refresh")
-                  .then(resolve(response))
-                  .catch(reject(response));
-              }
-            }, 500);
+            window.location.href = response.data.redirect;
           }
         })
         .catch(err => {
@@ -45,8 +31,8 @@ const actions = {
   logout({ commit }) {
     return new Promise(resolve => {
       axios.put(`/auth/logout/`).then(response => {
-        resolve(response);
         commit("logout");
+        resolve(response);
       });
     });
   },
