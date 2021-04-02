@@ -181,6 +181,8 @@ let router = new Router({
   mode: "history"
 });
 
+import axios from "axios";
+
 import store from "@/store";
 router.beforeEach((to, from, next) => {
   if (to.name == "LogIn") {
@@ -194,10 +196,20 @@ router.beforeEach((to, from, next) => {
         next({ path: to.fullPath });
       })
       .catch(() => {
-        console.log("redirecting to /login");
-        next({
-          path: "/login",
-          params: { nextUrl: to.fullPath }
+        axios.get("settings/auth/").then(response => {
+          if (response.data.method === "local") {
+            console.log("local auth: redirecting to /login");
+            next({
+              path: "/login",
+              params: { nextUrl: to.fullPath }
+            });
+          }
+          if (response.data.method == "oidc") {
+            console.log("oidc auth: launching authn flow");
+            store.dispatch("login", {}).catch(error => {
+              this.error = error.response.data.error;
+            });
+          }
         });
       });
   } else {
