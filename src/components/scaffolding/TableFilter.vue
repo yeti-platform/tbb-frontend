@@ -17,7 +17,7 @@
       <table id="table-filter" v-else class="table table-hover table-sm table-yeti">
         <thead>
           <tr>
-            <th v-bind:key="field['humanName']" v-for="field in filterParams.fields">{{ field["humanName"] }}</th>
+            <th v-bind:key="field['label']" v-for="field in filterParams.fields">{{ field["label"] }}</th>
           </tr>
         </thead>
         <tbody>
@@ -28,7 +28,7 @@
             @click.shift.exact="selectMultiple(elt)"
             v-bind:class="{ selected: selectedElements.includes(elt.id) }"
           >
-            <td class="align-middle" v-bind:key="field['name']" v-for="(field, index) in filterParams.fields">
+            <td class="align-middle" v-bind:key="field['field']" v-for="(field, index) in filterParams.fields">
               <router-link v-if="index === 0" :to="{ name: detailComponent, params: { id: elt.id } }">
                 <fields :field="field" :elt="elt" />
               </router-link>
