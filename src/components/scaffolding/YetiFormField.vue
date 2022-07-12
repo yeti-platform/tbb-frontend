@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="form-group">
-      <label :for="slug">{{ field.humanName }}</label>
+      <label :for="slug">{{ field.label }}</label>
 
       <!-- plain text input -->
       <yeti-text-input v-if="field.type === 'text'" v-model="bufferValue" :vocab="field.vocab" :id="slug" />
@@ -103,7 +103,7 @@ export default {
   },
   computed: {
     slug() {
-      return this.field.name.toLowerCase().replace(/[\s_]+|[^\w-]|^-+|-+$/g, "");
+      return this.field.field.toLowerCase().replace(/[\s_]+|[^\w-]|^-+|-+$/g, "");
     }
   },
   mounted() {

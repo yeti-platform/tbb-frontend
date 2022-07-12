@@ -36,12 +36,12 @@
           <div class="modal-body">
             <yeti-form-field
               v-model="newRelationship.relationship_type"
-              :field="{ name: 'relationship_type', type: 'text', humanName: 'Relationship type' }"
+              :field="{ field: 'relationship_type', type: 'text', label: 'Relationship type' }"
             >
             </yeti-form-field>
             <yeti-form-field
               v-model="newRelationship.description"
-              :field="{ name: 'description', type: 'longtext', humanName: 'Description' }"
+              :field="{ field: 'description', type: 'longtext', label: 'Description' }"
             >
             </yeti-form-field>
           </div>

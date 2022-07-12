@@ -5,7 +5,7 @@
         v-bind:key="field.name"
         v-for="field in fields"
         :field="field"
-        v-model="object[field['name']]"
+        v-model="object[field['field']]"
       ></yeti-form-field>
       <button id="submit" type="submit" class="btn btn-primary" v-bind:class="{ disabled: saving }">
         {{ saving ? "Saving..." : "Save changes" }}

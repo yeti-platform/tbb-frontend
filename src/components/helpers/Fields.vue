@@ -73,7 +73,7 @@ export default {
   },
   computed: {
     getFieldValue() {
-      return this.elt[this.field.name];
+      return this.elt[this.field.field];
     }
   }
 };

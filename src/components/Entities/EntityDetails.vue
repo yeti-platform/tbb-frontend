@@ -94,11 +94,11 @@
           <tr>
             <th>Created:</th>
             <td>
-              <fields :field="{ type: 'datetime', name: 'created' }" :elt="entity" />
+              <fields :field="{ type: 'datetime', field: 'created' }" :elt="entity" />
             </td>
             <th>Modified:</th>
             <td>
-              <fields :field="{ type: 'datetime', name: 'modified' }" :elt="entity" />
+              <fields :field="{ type: 'datetime', field: 'modified' }" :elt="entity" />
             </td>
           </tr>
           <tr v-if="entity.tool_version">
@@ -116,7 +116,7 @@
           <tr v-if="entity.sectors">
             <th>Sectors</th>
             <td colspan="5">
-              <fields :field="{ type: 'list', name: 'sectors' }" :elt="entity" />
+              <fields :field="{ type: 'list', field: 'sectors' }" :elt="entity" />
             </td>
           </tr>
           <tr v-if="entity.contact_information">
@@ -126,23 +126,23 @@
           <tr v-if="entity.aliases">
             <th>Aliases</th>
             <td colspan="5">
-              <fields :field="{ type: 'list', name: 'aliases' }" :elt="entity" />
+              <fields :field="{ type: 'list', field: 'aliases' }" :elt="entity" />
             </td>
           </tr>
           <tr v-if="entity.kill_chain_phases">
             <th>Kill-chain phases</th>
             <td colspan="5">
-              <fields :field="{ type: 'killchain', name: 'kill_chain_phases' }" :elt="entity" />
+              <fields :field="{ type: 'killchain', field: 'kill_chain_phases' }" :elt="entity" />
             </td>
           </tr>
           <tr v-if="entity.first_seen || entity.last_seen">
             <th>First seen:</th>
             <td>
-              <fields :field="{ type: 'datetime', name: 'first_seen' }" :elt="entity" />
+              <fields :field="{ type: 'datetime', field: 'first_seen' }" :elt="entity" />
             </td>
             <th>Last seen:</th>
             <td>
-              <fields :field="{ type: 'datetime', name: 'last_Seen' }" :elt="entity" />
+              <fields :field="{ type: 'datetime', field: 'last_Seen' }" :elt="entity" />
             </td>
           </tr>
           <tr v-if="entity.objective">
@@ -152,7 +152,7 @@
           <tr v-if="entity.roles || entity.sophistication">
             <th>Roles</th>
             <td>
-              <fields :field="{ type: 'list', name: 'roles' }" :elt="entity" />
+              <fields :field="{ type: 'list', field: 'roles' }" :elt="entity" />
             </td>
             <th>Sophistication</th>
             <td>{{ entity.sophistication }}</td>
@@ -160,7 +160,7 @@
           <tr v-if="entity.goals || entity.resource_level">
             <th>Goals</th>
             <td>
-              <fields :field="{ type: 'list', name: 'goals' }" :elt="entity" />
+              <fields :field="{ type: 'list', field: 'goals' }" :elt="entity" />
             </td>
             <th>Resource level</th>
             <td>{{ entity.resource_level }}</td>
@@ -170,11 +170,11 @@
             <td>{{ entity.primary_motivation }}</td>
             <th>Secondary</th>
             <td>
-              <fields :field="{ type: 'list', name: 'secondary_motivations' }" :elt="entity" />
+              <fields :field="{ type: 'list', field: 'secondary_motivations' }" :elt="entity" />
             </td>
             <th>Personal</th>
             <td>
-              <fields :field="{ type: 'list', name: 'personal_motivations' }" :elt="entity" />
+              <fields :field="{ type: 'list', field: 'personal_motivations' }" :elt="entity" />
             </td>
           </tr>
         </table>
@@ -193,37 +193,37 @@
             <tr>
               <td>Type</td>
               <td>
-                <fields :field="{ type: 'code', name: 'type' }" :elt="entity" />
+                <fields :field="{ type: 'code', field: 'type' }" :elt="entity" />
               </td>
             </tr>
             <tr>
               <td>STIX ID</td>
               <td>
-                <fields :field="{ type: 'code', name: 'id' }" :elt="entity" />
+                <fields :field="{ type: 'code', field: 'id' }" :elt="entity" />
               </td>
             </tr>
             <tr>
               <td>Created by</td>
               <td>
-                <fields :field="{ type: 'code', name: 'created_by_ref' }" :elt="entity" />
+                <fields :field="{ type: 'code', field: 'created_by_ref' }" :elt="entity" />
               </td>
             </tr>
             <tr>
               <td>Created</td>
               <td>
-                <fields :field="{ type: 'datetime', name: 'created' }" :elt="entity" />
+                <fields :field="{ type: 'datetime', field: 'created' }" :elt="entity" />
               </td>
             </tr>
             <tr>
               <td>Modified</td>
               <td>
-                <fields :field="{ type: 'datetime', name: 'modified' }" :elt="entity" />
+                <fields :field="{ type: 'datetime', field: 'modified' }" :elt="entity" />
               </td>
             </tr>
             <tr>
               <td>Revoked</td>
               <td>
-                <fields :field="{ type: 'boolean', name: 'revoked' }" :elt="entity" />
+                <fields :field="{ type: 'boolean', field: 'revoked' }" :elt="entity" />
               </td>
             </tr>
             <tr v-for="ref in entity.external_references" v-bind:key="ref.source_name">
