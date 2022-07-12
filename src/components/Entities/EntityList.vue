@@ -73,7 +73,6 @@ export default {
   methods: {
     fetchElements() {
       console.log("fetching elements");
-      console.log(listFields);
       let params = {
         type: this.filterParams.typeFilter
       };
