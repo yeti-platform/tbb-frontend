@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="labels">
-        <fields :field="{ type: 'list', name: 'labels' }" :elt="indicator" />
+        <fields :field="{ type: 'list', field: 'labels' }" :elt="indicator" />
       </div>
     </div>
 
@@ -83,9 +83,9 @@
         <table class="table">
           <tr>
             <th>Created:</th>
-            <td><fields :field="{ type: 'datetime', name: 'created' }" :elt="indicator" /></td>
+            <td><fields :field="{ type: 'datetime', field: 'created' }" :elt="indicator" /></td>
             <th>Modified:</th>
-            <td><fields :field="{ type: 'datetime', name: 'modified' }" :elt="indicator" /></td>
+            <td><fields :field="{ type: 'datetime', field: 'modified' }" :elt="indicator" /></td>
           </tr>
           <tr v-if="indicator.tool_version">
             <th>Tool version</th>
@@ -101,7 +101,7 @@
           </tr>
           <tr v-if="indicator.sectors">
             <th>Sectors</th>
-            <td colspan="5"><fields :field="{ type: 'list', name: 'sectors' }" :elt="indicator" /></td>
+            <td colspan="5"><fields :field="{ type: 'list', field: 'sectors' }" :elt="indicator" /></td>
           </tr>
           <tr v-if="indicator.contact_information">
             <th>Contact info</th>
@@ -109,17 +109,17 @@
           </tr>
           <tr v-if="indicator.aliases">
             <th>Aliases</th>
-            <td colspan="5"><fields :field="{ type: 'list', name: 'aliases' }" :elt="indicator" /></td>
+            <td colspan="5"><fields :field="{ type: 'list', field: 'aliases' }" :elt="indicator" /></td>
           </tr>
           <tr v-if="indicator.kill_chain_phases">
             <th>Kill-chain phases</th>
-            <td colspan="5"><fields :field="{ type: 'killchain', name: 'kill_chain_phases' }" :elt="indicator" /></td>
+            <td colspan="5"><fields :field="{ type: 'killchain', field: 'kill_chain_phases' }" :elt="indicator" /></td>
           </tr>
           <tr v-if="indicator.first_seen || indicator.last_seen">
             <th>First seen:</th>
-            <td><fields :field="{ type: 'datetime', name: 'first_seen' }" :elt="indicator" /></td>
+            <td><fields :field="{ type: 'datetime', field: 'first_seen' }" :elt="indicator" /></td>
             <th>Last seen:</th>
-            <td><fields :field="{ type: 'datetime', name: 'last_Seen' }" :elt="indicator" /></td>
+            <td><fields :field="{ type: 'datetime', field: 'last_Seen' }" :elt="indicator" /></td>
           </tr>
           <tr v-if="indicator.objective">
             <th>Objective</th>
@@ -127,13 +127,13 @@
           </tr>
           <tr v-if="indicator.roles || indicator.sophistication">
             <th>Roles</th>
-            <td><fields :field="{ type: 'list', name: 'roles' }" :elt="indicator" /></td>
+            <td><fields :field="{ type: 'list', field: 'roles' }" :elt="indicator" /></td>
             <th>Sophistication</th>
             <td>{{ indicator.sophistication }}</td>
           </tr>
           <tr v-if="indicator.goals || indicator.resource_level">
             <th>Goals</th>
-            <td><fields :field="{ type: 'list', name: 'goals' }" :elt="indicator" /></td>
+            <td><fields :field="{ type: 'list', field: 'goals' }" :elt="indicator" /></td>
             <th>Resource level</th>
             <td>{{ indicator.resource_level }}</td>
           </tr>
@@ -141,9 +141,9 @@
             <th>Primary motivation</th>
             <td>{{ indicator.primary_motivation }}</td>
             <th>Secondary</th>
-            <td><fields :field="{ type: 'list', name: 'secondary_motivations' }" :elt="indicator" /></td>
+            <td><fields :field="{ type: 'list', field: 'secondary_motivations' }" :elt="indicator" /></td>
             <th>Personal</th>
-            <td><fields :field="{ type: 'list', name: 'personal_motivations' }" :elt="indicator" /></td>
+            <td><fields :field="{ type: 'list', field: 'personal_motivations' }" :elt="indicator" /></td>
           </tr>
         </table>
 
@@ -154,7 +154,7 @@
 
         <div class="pattern mb-3">
           <h2>Pattern</h2>
-          <fields :field="{ type: 'code', name: 'pattern' }" :elt="indicator"></fields>
+          <fields :field="{ type: 'code', field: 'pattern' }" :elt="indicator"></fields>
         </div>
       </div>
 
@@ -165,27 +165,27 @@
           <table class="table">
             <tr>
               <td>Type</td>
-              <td><fields :field="{ type: 'code', name: 'type' }" :elt="indicator" /></td>
+              <td><fields :field="{ type: 'code', field: 'type' }" :elt="indicator" /></td>
             </tr>
             <tr>
               <td>STIX ID</td>
-              <td><fields :field="{ type: 'code', name: 'id' }" :elt="indicator" /></td>
+              <td><fields :field="{ type: 'code', field: 'id' }" :elt="indicator" /></td>
             </tr>
             <tr>
               <td>Created by</td>
-              <td><fields :field="{ type: 'code', name: 'created_by_ref' }" :elt="indicator" /></td>
+              <td><fields :field="{ type: 'code', field: 'created_by_ref' }" :elt="indicator" /></td>
             </tr>
             <tr>
               <td>Created</td>
-              <td><fields :field="{ type: 'datetime', name: 'created' }" :elt="indicator" /></td>
+              <td><fields :field="{ type: 'datetime', field: 'created' }" :elt="indicator" /></td>
             </tr>
             <tr>
               <td>Modified</td>
-              <td><fields :field="{ type: 'datetime', name: 'modified' }" :elt="indicator" /></td>
+              <td><fields :field="{ type: 'datetime', field: 'modified' }" :elt="indicator" /></td>
             </tr>
             <tr>
               <td>Revoked</td>
-              <td><fields :field="{ type: 'boolean', name: 'revoked' }" :elt="indicator" /></td>
+              <td><fields :field="{ type: 'boolean', field: 'revoked' }" :elt="indicator" /></td>
             </tr>
             <tr v-for="ref in indicator.external_references" v-bind:key="ref.source_name">
               <td>External reference</td>

@@ -1,62 +1,62 @@
 export const editFields = {
   indicator: [
-    { name: "name", type: "text", humanName: "Name" },
-    { name: "labels", type: "list", humanName: "Labels" },
-    { name: "description", type: "longtext", humanName: "Description" },
-    { name: "pattern", type: "code", humanName: "STIX pattern" },
-    { name: "valid_from", type: "datetime", humanName: "Valid from" },
-    { name: "valid_until", type: "datetime", humanName: "Valid until" },
-    { name: "kill_chain_phases", type: "killchain", humanName: "Kill-chain stages" }
+    { field: "name", type: "text", label: "Name" },
+    { field: "labels", type: "list", label: "Labels" },
+    { field: "description", type: "longtext", label: "Description" },
+    { field: "pattern", type: "code", label: "STIX pattern" },
+    { field: "valid_from", type: "datetime", label: "Valid from" },
+    { field: "valid_until", type: "datetime", label: "Valid until" },
+    { field: "kill_chain_phases", type: "killchain", label: "Kill-chain stages" }
   ],
   "x-regex": [
-    { name: "name", type: "text", humanName: "Name" },
-    { name: "labels", type: "list", humanName: "Labels" },
-    { name: "description", type: "longtext", humanName: "Description" },
-    { name: "pattern", type: "code", humanName: "Regular expression" },
-    { name: "valid_from", type: "datetime", humanName: "Valid from" },
-    { name: "valid_until", type: "datetime", humanName: "Valid until" },
-    { name: "kill_chain_phases", type: "killchain", humanName: "Kill-chain stages" }
+    { field: "name", type: "text", label: "Name" },
+    { field: "labels", type: "list", label: "Labels" },
+    { field: "description", type: "longtext", label: "Description" },
+    { field: "pattern", type: "code", label: "Regular expression" },
+    { field: "valid_from", type: "datetime", label: "Valid from" },
+    { field: "valid_until", type: "datetime", label: "Valid until" },
+    { field: "kill_chain_phases", type: "killchain", label: "Kill-chain stages" }
   ],
   "x-yara": [
-    { name: "name", type: "text", humanName: "Name" },
-    { name: "labels", type: "list", humanName: "Labels" },
-    { name: "description", type: "longtext", humanName: "Description" },
-    { name: "pattern", type: "code", humanName: "Yara rule" },
-    { name: "valid_from", type: "datetime", humanName: "Valid from" },
-    { name: "valid_until", type: "datetime", humanName: "Valid until" },
-    { name: "kill_chain_phases", type: "killchain", humanName: "Kill-chain stages" }
+    { field: "name", type: "text", label: "Name" },
+    { field: "labels", type: "list", label: "Labels" },
+    { field: "description", type: "longtext", label: "Description" },
+    { field: "pattern", type: "code", label: "Yara rule" },
+    { field: "valid_from", type: "datetime", label: "Valid from" },
+    { field: "valid_until", type: "datetime", label: "Valid until" },
+    { field: "kill_chain_phases", type: "killchain", label: "Kill-chain stages" }
   ],
   "x-sigma": [
-    { name: "name", type: "text", humanName: "Name" },
-    { name: "labels", type: "list", humanName: "Labels" },
-    { name: "description", type: "longtext", humanName: "Description" },
-    { name: "pattern", type: "code", humanName: "Sigma rule" },
-    { name: "valid_from", type: "datetime", humanName: "Valid from" },
-    { name: "valid_until", type: "datetime", humanName: "Valid until" },
-    { name: "kill_chain_phases", type: "killchain", humanName: "Kill-chain stages" }
+    { field: "name", type: "text", label: "Name" },
+    { field: "labels", type: "list", label: "Labels" },
+    { field: "description", type: "longtext", label: "Description" },
+    { field: "pattern", type: "code", label: "Sigma rule" },
+    { field: "valid_from", type: "datetime", label: "Valid from" },
+    { field: "valid_until", type: "datetime", label: "Valid until" },
+    { field: "kill_chain_phases", type: "killchain", label: "Kill-chain stages" }
   ]
 };
 
 export const listFields = {
   indicator: [
-    { name: "name", type: "text", humanName: "Name" },
-    { name: "labels", type: "list", humanName: "Labels" },
-    { name: "kill_chain_phases", type: "killchain", humanName: "Kill-chain stages" }
+    { field: "name", type: "text", label: "Name" },
+    { field: "labels", type: "list", label: "Labels" },
+    { field: "kill_chain_phases", type: "killchain", label: "Kill-chain stages" }
   ],
   "x-regex": [
-    { name: "name", type: "text", humanName: "Name" },
-    { name: "labels", type: "list", humanName: "Labels" },
-    { name: "kill_chain_phases", type: "killchain", humanName: "Kill-chain stages" }
+    { field: "name", type: "text", label: "Name" },
+    { field: "labels", type: "list", label: "Labels" },
+    { field: "kill_chain_phases", type: "killchain", label: "Kill-chain stages" }
   ],
   "x-yara": [
-    { name: "name", type: "text", humanName: "Name" },
-    { name: "labels", type: "list", humanName: "Labels" },
-    { name: "kill_chain_phases", type: "killchain", humanName: "Kill-chain stages" }
+    { field: "name", type: "text", label: "Name" },
+    { field: "labels", type: "list", label: "Labels" },
+    { field: "kill_chain_phases", type: "killchain", label: "Kill-chain stages" }
   ],
   "x-sigma": [
-    { name: "name", type: "text", humanName: "Name" },
-    { name: "labels", type: "list", humanName: "Labels" },
-    { name: "kill_chain_phases", type: "killchain", humanName: "Kill-chain stages" }
+    { field: "name", type: "text", label: "Name" },
+    { field: "labels", type: "list", label: "Labels" },
+    { field: "kill_chain_phases", type: "killchain", label: "Kill-chain stages" }
   ]
 };
 
