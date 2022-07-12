@@ -35,11 +35,14 @@
 <script>
 import { listFields } from "./IndicatorFields.js";
 import { indicatorTypes } from "./IndicatorTypes.js";
+import Fields from "@/components/helpers/Fields";
 
 import axios from "axios";
 
 export default {
-  components: {},
+  components: {
+    Fields
+  },
   props: ["type"],
   data() {
     return {
