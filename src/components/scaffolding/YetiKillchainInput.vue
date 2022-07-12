@@ -21,7 +21,10 @@ import axios from "axios";
 import VueTagsInput from "@johmun/vue-tags-input";
 
 export default {
-  props: ["value", "killchainName"],
+  props: {
+    value: { type: Array, default: () => [] },
+    killchainName: { type: String }
+  },
   components: {
     VueTagsInput
   },
