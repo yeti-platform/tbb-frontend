@@ -12,7 +12,7 @@
         {{ "New " + entityTypeHuman.singular }}
       </b-button>
     </div>
-    <b-table :data="entities" :paginated="true" :per-page="10" :current-page.sync="currentPage">
+    <b-table :data="entities" :paginated="true" :per-page="20" :current-page.sync="currentPage">
       <b-table-column
         v-for="field in columns"
         v-bind:key="field.field"
