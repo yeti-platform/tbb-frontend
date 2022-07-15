@@ -2,18 +2,18 @@
   <div id="app">
     <!-- Top menu -->
     <navigation />
-    <div class="container-fluid">
-      <div class="row" v-if="isAuthenticated">
-        <!-- sidebar column -->
-        <sidebar />
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <div class="section is-fullhd" v-if="isAuthenticated">
+      <div class="columns">
+        <div class="column is-one-fifth">
+          <sidebar />
+        </div>
+        <div class="column container is-four-fifths">
           <router-view />
-        </main>
+        </div>
       </div>
-      <!-- end row -->
-      <div v-else>
-        <log-in />
-      </div>
+    </div>
+    <div v-else>
+      <log-in />
     </div>
   </div>
 </template>
@@ -25,8 +25,8 @@ import LogIn from "@/components/LogIn";
 import axios from "axios";
 axios.defaults.baseURL = "/api";
 
-require("bootstrap");
-require("bootstrap/dist/css/bootstrap.css");
+// require("bootstrap");
+// require("bootstrap/dist/css/bootstrap.css");
 require("@fortawesome/fontawesome-free/js/all.js");
 
 export default {
