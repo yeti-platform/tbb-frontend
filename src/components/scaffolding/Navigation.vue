@@ -1,25 +1,18 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Yeti</a>
-    <div class="navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav px-3 ml-auto" v-if="!isAuthenticated">
-        <li class="nav-item">
-          <router-link class="nav-link active" :to="{ name: 'LogIn' }">Log in</router-link>
-        </li>
-      </ul>
-      <ul class="navbar-nav px-3 ml-auto" v-if="isAuthenticated">
-        <li v-if="isAuthenticated" class="nav-item">
-          <a class="nav-link active" href="#">{{ tokenSubject }}</a>
-        </li>
-        <li v-if="isAuthenticated" class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'AdminMain' }">Admin</router-link>
-        </li>
-        <li v-if="isAuthenticated" class="nav-item">
-          <a class="nav-link" href="#" @click="logOut">Logout</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <b-navbar :shadow="true" type="is-dark" class="tbb-navbar">
+    <template slot="brand">
+      <b-navbar-item href="#">
+        Yeti
+      </b-navbar-item>
+    </template>
+    <template slot="end">
+      <b-navbar-item v-if="!isAuthenticated" tag="router-link" :to="{ name: 'LogIn' }">Log in</b-navbar-item>
+      <b-navbar-item v-if="isAuthenticated" tag="div">
+        <span> {{ tokenSubject }}</span>
+        <a class="button is-light" @click="logOut">Log out</a>
+      </b-navbar-item>
+    </template>
+  </b-navbar>
 </template>
 
 <script>

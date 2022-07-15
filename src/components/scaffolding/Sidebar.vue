@@ -1,172 +1,88 @@
 <template lang="html">
-  <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-    <div class="sidebar-sticky">
-      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-        <span>Intelligence</span>
-      </h6>
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'EntityList', params: { type: 'attack-pattern' } }">
-            <i class="fas fa-fw fa-lg fa-gamepad"></i>Attack Patterns (TTPs)
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'EntityList', params: { type: 'campaign' } }">
-            <i class="fas fa-fw fa-lg fa-fighter-jet"></i>Campaigns
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'EntityList', params: { type: 'course-of-action' } }">
-            <i class="fas fa-fw fa-lg fa-medkit"></i>Courses of action
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'EntityList', params: { type: 'identity' } }">
-            <i class="fas fa-fw fa-lg fa-id-card"></i>Identities
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'EntityList', params: { type: 'intrusion-set' } }">
-            <i class="fas fa-fw fa-lg fa-umbrella"></i>Intrusion sets
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'EntityList', params: { type: 'malware' } }">
-            <i class="fas fa-fw fa-lg fa-bug"></i>Malware
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'EntityList', params: { type: 'report' } }">
-            <i class="far fa-fw fa-lg fa-newspaper"></i>Reports
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'EntityList', params: { type: 'threat-actor' } }">
-            <i class="fas fa-fw fa-lg fa-user-secret"></i>Threat actors
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'EntityList', params: { type: 'tool' } }">
-            <i class="fas fa-fw fa-lg fa-wrench"></i>Tools
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'EntityList', params: { type: 'vulnerability' } }">
-            <i class="fas fa-fw fa-lg fa-bolt"></i>Vulnerabilities
-          </router-link>
-        </li>
-      </ul>
+  <b-menu>
+    <b-menu-list label="Intelligence">
+      <b-menu-item
+        v-for="item in entities"
+        v-bind:key="item.type"
+        :label="item.label"
+        :icon="item.icon"
+        tag="router-link"
+        :active="$route.params.type === item.type"
+        :to="{ name: 'EntityList', params: { type: item.type } }"
+      >
+      </b-menu-item>
+    </b-menu-list>
+    <b-menu-list label="Operations">
+      <b-menu-item
+        icon="fire"
+        tag="router-link"
+        label="Incidents"
+        :active="$route.params.type === 'x-incident'"
+        :to="{ name: 'EntityList', params: { type: 'x-incident' } }"
+      ></b-menu-item>
+    </b-menu-list>
+    <b-menu-list label="Indicators">
+      <b-menu-item
+        v-for="item in indicators"
+        v-bind:key="item.type"
+        :label="item.label"
+        :icon="item.icon"
+        tag="router-link"
+        :active="$route.params.type === item.type"
+        :to="{ name: 'IndicatorList', params: { type: item.type } }"
+      >
+      </b-menu-item>
+    </b-menu-list>
+  </b-menu>
 
-      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-        <span>Operations</span>
-      </h6>
-      <ul class="nav flex-column mb-2">
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'EntityList', params: { type: 'x-incident' } }">
-            <i class="fas fa-fw fa-lg fa-fire"></i>Incidents
-          </router-link>
-        </li>
-      </ul>
+  <!--
 
-      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-        <span>Indicators</span>
-      </h6>
-      <ul class="nav flex-column mb-2">
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'IndicatorList', params: { type: 'indicator' } }">
-            <i class="fas fa-fw fa-lg fa-bolt"></i>STIX Indicators
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'IndicatorList', params: { type: 'x-regex' } }">
-            <i class="fas fa-fw fa-lg fa-bolt"></i>Regular expressions
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'IndicatorList', params: { type: 'x-yara' } }">
-            <i class="fas fa-fw fa-lg fa-bolt"></i>Yara rules
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'IndicatorList', params: { type: 'x-sigma' } }">
-            <i class="fas fa-fw fa-lg fa-bolt"></i>Sigma rules
-          </router-link>
-        </li>
-      </ul>
-
-      <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-        <span>Observables</span>
-      </h6>
-      <ul class="nav flex-column mb-2">
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'ObservableList' }">
-            <i class="fas fa-fw fa-lg fa-search"></i>Browse observables
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'ObservablesBulk' }">
-            <i class="fas fa-fw fa-lg fa-archive"></i>Bulk observable match
-          </router-link>
-        </li>
-      </ul>
-    </div>
-  </nav>
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>Observables</span>
+    </h6>
+    <ul class="nav flex-column mb-2">
+      <li class="nav-item">
+        <router-link class="nav-link" :to="{ name: 'ObservableList' }">
+          <i class="fas fa-fw fa-lg fa-search"></i>Browse observables
+        </router-link>
+      </li>
+      <li class="nav-item">
+        <router-link class="nav-link" :to="{ name: 'ObservablesBulk' }">
+          <i class="fas fa-fw fa-lg fa-archive"></i>Bulk observable match
+        </router-link>
+      </li>
+    </ul>
+  </b-menu> -->
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      entities: [
+        { label: "Attack pattern", type: "attack-pattern", icon: "gamepad" },
+        { label: "Courses of action", type: "course-of-action", icon: "medkit" },
+        { label: "Identities", type: "identity", icon: "id-card" },
+        { label: "Inrtusion sets", type: "intrusion-set", icon: "umbrella" },
+        { label: "Malware", type: "malware", icon: "bug" },
+        { label: "Reports", type: "report", icon: "newspaper" },
+        { label: "Threat actors", type: "threat-actor", icon: "user-secret" },
+        { label: "Tools", type: "tool", icon: "wrench" },
+        { label: "Vulnerabilities", type: "vulnerability", icon: "bolt" }
+      ],
+      indicators: [
+        { label: "STIX Indicators", type: "indicator", icon: "bolt" },
+        { label: "Regular expressions", type: "x-regex", icon: "bolt" },
+        { label: "Yara rules", type: "x-yara", icon: "bolt" },
+        { label: "Sigma rules", type: "x-sigma", icon: "bolt" }
+      ]
+    };
+  }
+};
 </script>
 
 <style lang="css">
 /*
  * Sidebar
  */
-
-.sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100; /* Behind the navbar */
-  padding: 0;
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
-}
-
-.sidebar-sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 48px; /* Height of navbar */
-  height: calc(100vh - 48px);
-  padding-top: 0.5rem;
-  overflow-x: hidden;
-  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-}
-
-.sidebar .nav-link {
-  font-weight: 500;
-  color: #333;
-}
-
-.sidebar .nav-link .feather {
-  margin-right: 4px;
-  color: #999;
-}
-
-.sidebar .nav-link.router-link-active {
-  color: #007bff;
-}
-
-.sidebar .nav-link:hover .feather,
-.sidebar .nav-link.router-link-active .feather {
-  color: inherit;
-}
-
-.sidebar-heading {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-}
-
-a svg {
-  margin-right: 5px;
-}
 </style>
