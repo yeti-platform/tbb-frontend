@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <b-table :data="indicators" :paginated="true" :per-page="10" :current-page.sync="currentPage">
+    <b-table :data="indicators" :paginated="true" :per-page="10" :current-page.sync="currentPage" :loading="isLoading">
       <b-table-column
         v-for="field in columns"
         v-bind:key="field.field"
@@ -48,7 +48,8 @@ export default {
     return {
       indicators: [],
       loading: false,
-      currentPage: 1
+      currentPage: 1,
+      isLoading: true
     };
   },
   computed: {
@@ -84,6 +85,7 @@ export default {
             elt.selected = false;
             return elt;
           });
+          this.isLoading = false;
         })
         .catch(error => {
           console.log(error);
@@ -98,6 +100,7 @@ export default {
   },
   watch: {
     type: function() {
+      this.isLoading = true;
       this.fetchElements();
     }
   }

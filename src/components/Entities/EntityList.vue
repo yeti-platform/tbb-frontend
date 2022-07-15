@@ -12,7 +12,7 @@
         {{ "New " + entityTypeHuman.singular }}
       </b-button>
     </div>
-    <b-table :data="entities" :paginated="true" :per-page="20" :current-page.sync="currentPage">
+    <b-table :data="entities" :paginated="true" :per-page="20" :current-page.sync="currentPage" :loading="isLoading">
       <b-table-column
         v-for="field in columns"
         v-bind:key="field.field"
@@ -47,7 +47,8 @@ export default {
     return {
       entities: [],
       loading: false,
-      currentPage: 1
+      currentPage: 1,
+      isLoading: true
     };
   },
   props: ["type"],
@@ -85,6 +86,7 @@ export default {
             elt.selected = false;
             return elt;
           });
+          this.isLoading = false;
         })
         .catch(error => {
           console.log(error);
@@ -99,6 +101,7 @@ export default {
   },
   watch: {
     type: function() {
+      this.isLoading = true;
       this.fetchElements();
     }
   }
