@@ -5,18 +5,20 @@
   </span>
   <div v-else-if="!edit" class="indicator-details">
     <!-- Title and edit button -->
-    <div>
+    <div id="header">
       <h2 class="subtitle">
         {{ indicatorTypeHuman.singular }}
       </h2>
-      <h1 class="title">{{ indicator.name }}</h1>
+      <h1 class="title">
+        {{ indicator.name }}
+        <b-button tag="router-link" :to="{ name: 'IndicatorEdit', params: { id: id } }">Edit</b-button>
+      </h1>
 
-      <router-link :to="{ name: 'IndicatorEdit', params: { id: id } }">Edit</router-link>
       <fields :field="{ type: 'list', field: 'labels' }" :elt="indicator" />
     </div>
 
     <b-tabs :animated="false" v-model="activeTab">
-      <b-tab-item label="Main">
+      <b-tab-item label="Main" class="content">
         <table class="table">
           <tr>
             <th>Created:</th>
@@ -84,19 +86,19 @@
           </tr>
         </table>
 
-        <div class="description mb-3">
+        <div class="description">
           <h2>Description</h2>
           <markdown-text :text="indicator.description || 'No description'"></markdown-text>
         </div>
 
-        <div class="pattern mb-3">
+        <div class="pattern">
           <h2>Pattern</h2>
           <fields :field="{ type: 'code', field: 'pattern' }" :elt="indicator"></fields>
         </div>
       </b-tab-item>
 
       <b-tab-item label="Details">
-        <div class="details mb-3">
+        <div class="details content">
           <h2>Details</h2>
           <table class="table">
             <tr>
@@ -315,3 +317,13 @@ export default {
   }
 };
 </script>
+
+<style lang="css">
+#header {
+  margin-bottom: 1rem;
+}
+
+#header .title {
+  margin-bottom: 0.75rem;
+}
+</style>

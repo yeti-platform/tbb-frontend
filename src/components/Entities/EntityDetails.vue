@@ -5,19 +5,21 @@
   </span>
   <div v-else-if="!edit" class="entity-details">
     <!-- Title and edit button -->
-    <div>
+    <div id="header">
       <h2 class="subtitle">
         {{ entityTypeHuman.singular }}
       </h2>
-      <h1 class="title">{{ entity.name }}</h1>
-      <router-link :to="{ name: 'EntityEdit', params: { id: id } }">
-        Edit
-      </router-link>
+      <h1 class="title">
+        {{ entity.name }}
+        <b-button tag="router-link" :to="{ name: 'EntityEdit', params: { id: id } }">
+          Edit
+        </b-button>
+      </h1>
       <fields :field="{ type: 'list', field: 'labels' }" :elt="entity" />
     </div>
 
     <b-tabs :animated="false" v-model="activeTab">
-      <b-tab-item label="Main">
+      <b-tab-item label="Main" class="content">
         <table class="table">
           <tr>
             <th>Created:</th>
@@ -114,7 +116,7 @@
       </b-tab-item>
 
       <b-tab-item label="Details">
-        <div class="details mb-3">
+        <div class="details content">
           <h2>Details</h2>
           <table class="table">
             <tr>
@@ -210,7 +212,7 @@
         <kill-chain-view :entity="entity"></kill-chain-view>
       </b-tab-item>
 
-      <b-tab-item label="Raw JSON">
+      <b-tab-item label="Raw JSON" class="content">
         <pre>{{ entity }}</pre>
       </b-tab-item>
     </b-tabs>
@@ -253,7 +255,7 @@ export default {
       entity: {},
       error: {},
       defaultApiPath: `/entities/`,
-      activeTab: "0"
+      activeTab: 0
     };
   },
   props: { id: [Number, String], edit: Boolean },
@@ -348,3 +350,13 @@ export default {
   }
 };
 </script>
+
+<style lang="css">
+#header {
+  margin-bottom: 1rem;
+}
+
+#header .title {
+  margin-bottom: 0.75rem;
+}
+</style>
