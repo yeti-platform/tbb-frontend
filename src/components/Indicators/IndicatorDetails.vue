@@ -17,7 +17,7 @@
       <fields :field="{ type: 'list', field: 'labels' }" :elt="indicator" />
     </div>
 
-    <b-tabs :animated="false" v-model="activeTab">
+    <b-tabs :animated="false">
       <b-tab-item label="Main" class="content">
         <table class="table">
           <tr>
@@ -174,7 +174,6 @@
 
       <b-tab-item label="Relationships">
         <div class="relationships">
-          <h2>Relationships</h2>
           <links :object="indicator" :detailComponent="'IndicatorDetails'" />
         </div>
       </b-tab-item>

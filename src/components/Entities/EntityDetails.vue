@@ -18,7 +18,7 @@
       <fields :field="{ type: 'list', field: 'labels' }" :elt="entity" />
     </div>
 
-    <b-tabs :animated="false" v-model="activeTab">
+    <b-tabs :animated="false">
       <b-tab-item label="Main" class="content">
         <table class="table">
           <tr>
@@ -203,12 +203,10 @@
       >
 
       <b-tab-item label="Relationships">
-        <h2>Relationships</h2>
         <links :object="entity" :detailComponent="'EntityDetails'" />
       </b-tab-item>
 
       <b-tab-item label="Kill-chain view">
-        <h2>Kill chain view</h2>
         <kill-chain-view :entity="entity"></kill-chain-view>
       </b-tab-item>
 
