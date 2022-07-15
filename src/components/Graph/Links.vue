@@ -1,22 +1,74 @@
 <template>
   <div class="links">
-    <ul class="nav nav-pills mb-3 float-left" role="tablist">
-      <li class="nav-item" v-bind:key="linkType" v-for="(linkType, index) in linkTypes">
-        <a
-          class="nav-link"
-          v-bind:class="{ active: index === 0 }"
-          :id="linkType + '-tab'"
-          data-toggle="tab"
-          :href="'#' + linkType"
-          role="tab"
-          :aria-controls="linkType"
-          aria-selected="true"
-        >
-          <type-to-icon :type="linkType"></type-to-icon> {{ objectType(linkType).plural }}
-          <span class="badge badge-pill badge-light ml-2"> {{ getFilterEdges(linkType).length }}</span>
-        </a>
-      </li>
-    </ul>
+    <b-tabs :animated="false">
+      <b-tab-item v-for="linkType in linkTypes" v-bind:key="linkType">
+        <template #header>
+          <span>
+            {{ objectType(linkType).plural }} <b-tag rounded> {{ getFilterEdges(linkType).length }} </b-tag>
+          </span>
+        </template>
+        <table class="table">
+          <tr
+            v-for="edge in getFilterEdges(linkType)"
+            v-bind:key="edge._id"
+            @click.exact="select(edge)"
+            @click.shift.exact="selectMultiple(edge)"
+            v-bind:class="{ selected: selectedLinks.includes(edge.id) }"
+            class="show-on-hover"
+          >
+            <td class="show-on-hover">
+              <a href="#" @click="$refs.deleteLinks.deleteLinks([edge.id])"><i class="fas fa-unlink"></i></a>
+            </td>
+            <td class="incoming-vertice">
+              <router-link
+                :to="{
+                  name: entityComponent(getIncomingVertice(graph, edge)),
+                  params: { id: getIncomingVertice(graph, edge).id }
+                }"
+              >
+                <type-to-icon :type="getIncomingVertice(graph, edge).type"></type-to-icon
+                >{{ getIncomingVertice(graph, edge).name }}
+              </router-link>
+              <neighbor-icons
+                v-if="getIncomingVertice(graph, edge).id !== object.id"
+                :entity="getIncomingVertice(graph, edge)"
+                :neighbors="extendedGraph"
+              >
+              </neighbor-icons>
+            </td>
+            <td>&rarr;</td>
+            <td>{{ edge.relationship_type }}</td>
+            <td>&rarr;</td>
+            <td class="outgoing-vertice">
+              <router-link
+                :to="{
+                  name: entityComponent(getOutgoingVertice(graph, edge)),
+                  params: { id: getOutgoingVertice(graph, edge).id }
+                }"
+              >
+                <type-to-icon :type="getOutgoingVertice(graph, edge).type"></type-to-icon
+                >{{ getOutgoingVertice(graph, edge).name }}
+              </router-link>
+              <neighbor-icons
+                v-if="getOutgoingVertice(graph, edge).id !== object.id"
+                :entity="getOutgoingVertice(graph, edge)"
+                :neighbors="extendedGraph"
+              >
+              </neighbor-icons>
+            </td>
+            <td><markdown-text :text="edge.description || 'No description'"></markdown-text></td>
+            <td>
+              <p v-for="ref in edge.external_references" v-bind:key="ref.source_name">
+                <a :href="ref.url" target="_blank">{{ ref.source_name }}</a>
+                <small v-if="ref.description"><br />{{ ref.description }}</small>
+                <small v-if="ref.external_id"><br />{{ ref.external_id }}</small>
+              </p>
+            </td>
+          </tr>
+        </table>
+      </b-tab-item>
+    </b-tabs>
+
     <div class="float-right">
       <new-link ref="newLink" :sourceEntity="object" v-on:links-changed="fetchNeighbors"></new-link>
       <delete-links
@@ -27,83 +79,6 @@
       >
       </delete-links>
       <edit-links :selectedLinks="selectedLinks" v-on:links-changed="fetchNeighbors"></edit-links>
-    </div>
-
-    <div class="tab-content">
-      <div
-        v-bind:class="{ active: index === 0, show: index === 0 }"
-        v-bind:key="linkType"
-        v-for="(linkType, index) in linkTypes"
-        class="tab-pane"
-        :id="linkType"
-        role="tabpanel"
-        :aria-labelledby="linkType + '-tab'"
-      >
-        <div>
-          <span v-if="loading">
-            <i class="fas fa-circle-notch fa-spin fa-3x m-3"></i>
-          </span>
-          <table v-else class="table table-sm">
-            <tr
-              v-for="edge in getFilterEdges(linkType)"
-              v-bind:key="edge._id"
-              @click.exact="select(edge)"
-              @click.shift.exact="selectMultiple(edge)"
-              v-bind:class="{ selected: selectedLinks.includes(edge.id) }"
-              class="show-on-hover"
-            >
-              <td class="show-on-hover">
-                <a href="#" @click="$refs.deleteLinks.deleteLinks([edge.id])"><i class="fas fa-unlink"></i></a>
-              </td>
-              <td class="incoming-vertice">
-                <router-link
-                  :to="{
-                    name: entityComponent(getIncomingVertice(graph, edge)),
-                    params: { id: getIncomingVertice(graph, edge).id }
-                  }"
-                >
-                  <type-to-icon :type="getIncomingVertice(graph, edge).type"></type-to-icon
-                  >{{ getIncomingVertice(graph, edge).name }}
-                </router-link>
-                <neighbor-icons
-                  v-if="getIncomingVertice(graph, edge).id !== object.id"
-                  :entity="getIncomingVertice(graph, edge)"
-                  :neighbors="extendedGraph"
-                >
-                </neighbor-icons>
-              </td>
-              <td>&rarr;</td>
-              <td>{{ edge.relationship_type }}</td>
-              <td>&rarr;</td>
-              <td class="outgoing-vertice">
-                <router-link
-                  :to="{
-                    name: entityComponent(getOutgoingVertice(graph, edge)),
-                    params: { id: getOutgoingVertice(graph, edge).id }
-                  }"
-                >
-                  <type-to-icon :type="getOutgoingVertice(graph, edge).type"></type-to-icon
-                  >{{ getOutgoingVertice(graph, edge).name }}
-                </router-link>
-                <neighbor-icons
-                  v-if="getOutgoingVertice(graph, edge).id !== object.id"
-                  :entity="getOutgoingVertice(graph, edge)"
-                  :neighbors="extendedGraph"
-                >
-                </neighbor-icons>
-              </td>
-              <td><markdown-text :text="edge.description || 'No description'"></markdown-text></td>
-              <td>
-                <p v-for="ref in edge.external_references" v-bind:key="ref.source_name">
-                  <a :href="ref.url" target="_blank">{{ ref.source_name }}</a>
-                  <small v-if="ref.description"><br />{{ ref.description }}</small>
-                  <small v-if="ref.external_id"><br />{{ ref.external_id }}</small>
-                </p>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -134,7 +109,8 @@ export default {
       graph: {},
       loading: true,
       selectedLinks: [],
-      extendedGraph: undefined
+      extendedGraph: undefined,
+      activeTab: 0
     };
   },
   computed: {
