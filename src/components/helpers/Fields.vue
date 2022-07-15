@@ -1,32 +1,28 @@
 <template lang="html">
   <!-- display tags -->
   <div v-if="field.type === 'tags'" :class="field.name">
-    <span
-      v-for="tag in getFieldValue"
-      v-bind:key="tag.name"
-      class="badge m-1"
-      v-bind:class="{ 'badge-secondary': !tag.fresh, 'badge-primary': tag.fresh }"
-    >
-      {{ tag.name }}
-    </span>
+    <b-taglist>
+      <b-tag v-for="tag in getFieldValue" v-bind:key="tag.name" type="is-info is-light">
+        {{ tag.name }}
+      </b-tag>
+    </b-taglist>
   </div>
 
   <!-- display generic arrays as a list of tags -->
   <span v-else-if="field.type === 'list'" :class="field.name">
-    <span v-for="v in getFieldValue" v-bind:key="v" class="badge m-1 badge-primary">
-      {{ v }}
-    </span>
+    <b-taglist>
+      <b-tag v-for="v in getFieldValue" v-bind:key="v" type="is-info is-light">
+        {{ v }}
+      </b-tag>
+    </b-taglist>
   </span>
 
   <div v-else-if="field.type == 'killchain'" :class="field.name">
-    <span
-      v-for="v in getFieldValue"
-      v-bind:key="v.phase_name"
-      class="badge m-1 badge-primary"
-      :title="v.kill_chain_name"
-    >
-      {{ v.phase_name }}
-    </span>
+    <b-taglist>
+      <b-tag v-for="v in getFieldValue" v-bind:key="v.phase_name" type="is-info is-light" :title="v.kill_chain_name">
+        {{ v.phase_name }}
+      </b-tag>
+    </b-taglist>
   </div>
 
   <div v-else-if="field.type === 'datetime'" :class="field.name">
