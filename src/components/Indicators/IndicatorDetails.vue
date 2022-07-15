@@ -5,81 +5,18 @@
   </span>
   <div v-else-if="!edit" class="indicator-details">
     <!-- Title and edit button -->
-    <div class="title border-bottom mb-4 pb-2">
-      <div class="indicator-type">
+    <div>
+      <h2 class="subtitle">
         {{ indicatorTypeHuman.singular }}
-      </div>
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
-        <h1 class="h1 yeti-title">{{ indicator.name }}</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group mr-2">
-            <router-link
-              class="edit btn btn-sm btn-outline-secondary"
-              :to="{ name: 'IndicatorEdit', params: { id: id } }"
-              >Edit</router-link
-            >
-          </div>
-        </div>
-      </div>
-      <div class="labels">
-        <fields :field="{ type: 'list', field: 'labels' }" :elt="indicator" />
-      </div>
+      </h2>
+      <h1 class="title">{{ indicator.name }}</h1>
+
+      <router-link :to="{ name: 'IndicatorEdit', params: { id: id } }">Edit</router-link>
+      <fields :field="{ type: 'list', field: 'labels' }" :elt="indicator" />
     </div>
 
-    <ul class="nav nav-pills mb-3" id="myTab" role="tablist">
-      <li class="nav-item">
-        <a
-          class="nav-link active"
-          id="main-tab"
-          data-toggle="tab"
-          href="#main"
-          role="tab"
-          aria-controls="main"
-          aria-selected="true"
-          >Main</a
-        >
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          id="details-tab"
-          data-toggle="tab"
-          href="#details"
-          role="tab"
-          aria-controls="details"
-          aria-selected="false"
-          >Details</a
-        >
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          id="relationships-tab"
-          data-toggle="tab"
-          href="#relationships"
-          role="tab"
-          aria-controls="relationships"
-          aria-selected="false"
-          >Relationships</a
-        >
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          id="json-tab"
-          data-toggle="tab"
-          href="#json"
-          role="tab"
-          aria-controls="json"
-          aria-selected="false"
-          >Raw JSON</a
-        >
-      </li>
-    </ul>
-
-    <div class="tab-content">
-      <!-- Labels and other common info -->
-      <div class="tab-pane show active" id="main" role="tabpanel" aria-labelledby="main-tab">
+    <b-tabs :animated="false" v-model="activeTab">
+      <b-tab-item label="Main">
         <table class="table">
           <tr>
             <th>Created:</th>
@@ -156,10 +93,9 @@
           <h2>Pattern</h2>
           <fields :field="{ type: 'code', field: 'pattern' }" :elt="indicator"></fields>
         </div>
-      </div>
+      </b-tab-item>
 
-      <!-- Detailed information -->
-      <div class="tab-pane" id="details" role="tabpanel" aria-labelledby="details-tab">
+      <b-tab-item label="Details">
         <div class="details mb-3">
           <h2>Details</h2>
           <table class="table">
@@ -232,25 +168,21 @@
             </table>
           </div>
         </div>
-      </div>
+      </b-tab-item>
 
-      <!-- Links and graph -->
-      <div class="tab-pane" id="relationships" role="tabpanel" aria-labelledby="relationships-tab">
+      <b-tab-item label="Relationships">
         <div class="relationships">
           <h2>Relationships</h2>
           <links :object="indicator" :detailComponent="'IndicatorDetails'" />
         </div>
-      </div>
+      </b-tab-item>
 
-      <!-- JSON -->
-      <div class="tab-pane" id="json" role="tabpanel" aria-labelledby="json-tab">
+      <b-tab-item label="Raw JSON">
         <div class="json">
           <pre>{{ indicator }}</pre>
         </div>
-      </div>
-
-      <!-- End tab content -->
-    </div>
+      </b-tab-item>
+    </b-tabs>
   </div>
 
   <!--  Edit form -->
@@ -288,7 +220,8 @@ export default {
       loading: true,
       indicator: {},
       error: {},
-      defaultApiPath: `/indicators/`
+      defaultApiPath: `/indicators/`,
+      activeTab: 0
     };
   },
   props: { id: [Number, String], edit: Boolean },
