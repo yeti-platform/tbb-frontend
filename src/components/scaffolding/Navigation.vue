@@ -8,7 +8,9 @@
     <template slot="end">
       <b-navbar-item v-if="!isAuthenticated" tag="router-link" :to="{ name: 'LogIn' }">Log in</b-navbar-item>
       <b-navbar-item v-if="isAuthenticated" tag="div">
-        <span> {{ tokenSubject }}</span>
+        <p>{{ tokenSubject }}</p>
+      </b-navbar-item>
+      <b-navbar-item v-if="isAuthenticated" tag="div">
         <a class="button is-light" @click="logOut">Log out</a>
       </b-navbar-item>
     </template>
@@ -55,7 +57,7 @@ export default {
   border-radius: 0;
 }
 
-.form-control-dark {
+.navbar .form-control-dark {
   color: #fff;
   background-color: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.1);

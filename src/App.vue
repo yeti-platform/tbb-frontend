@@ -7,7 +7,7 @@
         <div class="column is-one-fifth">
           <sidebar />
         </div>
-        <div class="column container is-four-fifths">
+        <div class="column container is-four-fifths is-fluid">
           <router-view />
         </div>
       </div>
