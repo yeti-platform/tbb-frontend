@@ -28,8 +28,8 @@ export const entityTypes = {
     singular: "Report"
   },
   "threat-actor": {
-    plural: "Actors",
-    singular: "Actor"
+    plural: "Threat actors",
+    singular: "Threat actor"
   },
   tool: {
     plural: "Tools",
