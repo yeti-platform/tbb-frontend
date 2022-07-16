@@ -2,13 +2,7 @@
   <div>
     <div>
       <h1 class="title">{{ entityTypeHuman.plural }}</h1>
-      <b-button
-        v-if="type"
-        tag="router-link"
-        id="new-entity"
-        class="btn btn-sm btn-outline-secondary"
-        :to="{ name: 'NewEntity', params: { type } }"
-      >
+      <b-button v-if="type" tag="router-link" :to="{ name: 'NewEntity', params: { type } }">
         {{ "New " + entityTypeHuman.singular }}
       </b-button>
     </div>

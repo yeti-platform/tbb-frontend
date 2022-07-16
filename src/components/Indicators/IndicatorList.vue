@@ -4,13 +4,9 @@
       <h1 class="title">{{ indicatorTypeHuman.plural }}</h1>
       <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group mr-2">
-          <router-link
-            v-if="type"
-            id="new-indicator"
-            class="btn btn-sm btn-outline-secondary"
-            :to="{ name: 'NewIndicator', params: { type } }"
-            >{{ "New " + indicatorTypeHuman.singular }}</router-link
-          >
+          <b-button tag="router-link" v-if="type" :to="{ name: 'NewIndicator', params: { type } }">{{
+            "New " + indicatorTypeHuman.singular
+          }}</b-button>
         </div>
       </div>
     </div>
