@@ -63,7 +63,7 @@ export default {
         { label: "Attack pattern", type: "attack-pattern", icon: "gamepad" },
         { label: "Courses of action", type: "course-of-action", icon: "medkit" },
         { label: "Identities", type: "identity", icon: "id-card" },
-        { label: "Inrtusion sets", type: "intrusion-set", icon: "umbrella" },
+        { label: "Intrusion sets", type: "intrusion-set", icon: "umbrella" },
         { label: "Malware", type: "malware", icon: "bug" },
         { label: "Reports", type: "report", icon: "newspaper" },
         { label: "Threat actors", type: "threat-actor", icon: "user-secret" },
