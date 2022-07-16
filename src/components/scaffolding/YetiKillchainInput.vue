@@ -10,8 +10,13 @@
       @typing="filteredItems"
       :before-adding="tag => this.selectedPhases.filter(item => item.phase_name === tag.phase_name).length === 0"
     >
+      <template v-slot="props">
+        <b-tag>{{ availableKillchains.filter(kc => kc.name === props.option.kill_chain_name)[0].human_name }}</b-tag>
+        {{ props.option.phase_name }}
+      </template>
     </b-taginput>
     <small>
+      <p>Available killchains:</p>
       <b-taglist>
         <b-tag v-for="kc in this.availableKillchains" v-bind:key="kc.name" type="is-info is-light">
           {{ kc.name }}
@@ -75,24 +80,8 @@ export default {
 </script>
 
 <style lang="css">
-.vue-tags-input .input {
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-}
-
-.vue-tags-input .autocomplete .selected-item {
-  background-color: #007bff;
-}
-
-.vue-tags-input .tag {
-  background-color: #007bff !important;
-  border-radius: 0.25rem !important;
-  vertical-align: baseline;
-  line-height: 1;
-  text-align: center;
-}
-
-.vue-tags-input .deletion-mark {
-  background-color: red !important;
+small p {
+  float: left;
+  margin-right: 0.25rem;
 }
 </style>
