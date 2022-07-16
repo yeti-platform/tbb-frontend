@@ -265,7 +265,7 @@ export default {
         });
     },
     toggleEdit() {
-      this.$router.go(-1);
+      this.$router.push({ name: "IndicatorDetails", params: { id: this.id } });
     },
     getSpecificProperties(indicator) {
       var properties = [];
