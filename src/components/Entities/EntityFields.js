@@ -57,17 +57,47 @@ export const editFields = {
     { field: "published", type: "datetime", label: "Date published" }
   ],
   "threat-actor": [
-    { field: "name", type: "text", label: "Name" },
-    { field: "labels", type: "list", vocab: "threat-actor-label-ov", label: "Labels" },
-    { field: "description", type: "longtext", label: "Description" },
-    { field: "aliases", type: "list", label: "Aliases" },
-    { field: "roles", type: "list", vocab: "threat-actor-role-ov", label: "Roles" },
-    { field: "goals", type: "list", label: "Goals" },
-    { field: "sophistication", type: "text", vocab: "threat-actor-sophistication-ov", label: "Sophistication" },
-    { field: "resource_level", type: "text", vocab: "attack-resource-level-ov", label: "Resource level" },
-    { field: "primary_motivation", type: "text", vocab: "attack-motivation-ov", label: "Primary motivation" },
-    { field: "secondary_motivations", type: "list", vocab: "attack-motivation-ov", label: "Secondary motivations" },
-    { field: "personal_motivations", type: "list", vocab: "attack-motivation-ov", label: "Personal motivations" }
+    { field: "name", type: "text", label: "Name", group: "Main" },
+    { field: "labels", type: "list", vocab: "threat-actor-label-ov", label: "Labels", group: "Main" },
+    { field: "description", type: "longtext", label: "Description", group: "Description" },
+    { field: "aliases", type: "list", label: "Aliases", group: "Aliases & roles" },
+    { field: "roles", type: "list", vocab: "threat-actor-role-ov", label: "Roles", group: "Aliases & roles" },
+    { field: "goals", type: "list", label: "Goals", group: "Aliases & roles" },
+    {
+      field: "sophistication",
+      type: "text",
+      vocab: "threat-actor-sophistication-ov",
+      label: "Sophistication",
+      group: "Sophistication"
+    },
+    {
+      field: "resource_level",
+      type: "text",
+      vocab: "attack-resource-level-ov",
+      label: "Resource level",
+      group: "Sophistication"
+    },
+    {
+      field: "primary_motivation",
+      type: "text",
+      vocab: "attack-motivation-ov",
+      label: "Primary motivation",
+      group: "Motivations"
+    },
+    {
+      field: "secondary_motivations",
+      type: "list",
+      vocab: "attack-motivation-ov",
+      label: "Secondary motivations",
+      group: "Motivations"
+    },
+    {
+      field: "personal_motivations",
+      type: "list",
+      vocab: "attack-motivation-ov",
+      label: "Personal motivations",
+      group: "Motivations"
+    }
   ],
   tool: [
     { field: "name", type: "text", label: "Name" },
