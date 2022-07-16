@@ -1,58 +1,38 @@
 <template>
   <div>
-    <vue-tags-input
-      :tags="listItems"
-      v-model="item"
-      @before-adding-tag="addingPhase"
-      @before-deleting-tag="deletingPhase"
-      :autocomplete-min-length="0"
-      :add-on-key="[13, 188, 186]"
-      :separators="[',', ';']"
-      :autocomplete-items="filteredItems"
-    />
-    <small v-if="autocompleteVocab" class="form-text text-muted"
-      >Autocompleting from <code>{{ autocompleteVocab }}</code></small
-    >
+    <b-taginput v-model="vocabList" placeholder="Add a tag"> </b-taginput>
+    <small v-if="autocompleteVocab" class="form-text text-muted">
+      Autocompleting from <code>{{ autocompleteVocab }}</code>
+    </small>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import VueTagsInput from "@johmun/vue-tags-input";
 
 export default {
-  components: {
-    VueTagsInput
-  },
+  components: {},
   props: ["value", "autocompleteVocab", "displayKey"],
   data() {
     return {
-      item: "",
       autocompleteItems: [],
-      vocabList: []
+      vocabList: this.value
     };
   },
   methods: {
-    deletingPhase(event) {
-      for (var i in this.vocabList) {
-        if (this.vocabList[i] === event.tag.text) {
-          this.vocabList.splice(i, 1);
-          event.deleteTag();
-          this.$emit("input", this.vocabList);
-        }
-      }
-    },
-    addingPhase(event) {
-      event.addTag();
-      this.vocabList.push(event.tag.text);
-      this.$emit("input", this.vocabList);
-    },
     getValuesForVocab: function() {
-      axios.get("/settings/vocabs/" + this.autocompleteVocab + "/").then(response => {
-        if (response.status === 200) {
-          this.autocompleteItems = response.data.map(item => Object({ text: item }));
-        }
-      });
+      axios
+        .get("/settings/vocabs/" + this.autocompleteVocab + "/")
+        .then(response => {
+          if (response.status === 200) {
+            this.autocompleteItems = response.data.map(item => Object({ text: item }));
+          }
+        })
+        .catch(error => {
+          if (error.response.status == 404) {
+            console.log(`No vocab found for ${this.autocompleteVocab}: ${error}`);
+          }
+        });
     }
   },
   computed: {
@@ -73,11 +53,11 @@ export default {
     }
   },
   watch: {
+    vocabList: function(vocabList) {
+      this.$emit("input", vocabList);
+    },
     value: function(val) {
       this.vocabList = val;
-      if (val === undefined) {
-        this.vocabList = [];
-      }
     }
   }
 };

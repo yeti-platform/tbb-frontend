@@ -1,84 +1,75 @@
 <template>
   <div>
-    <vue-tags-input
-      :tags="listItems"
-      v-model="item"
-      @before-adding-tag="addingPhase"
-      @before-deleting-tag="deletingPhase"
-      :autocomplete-min-length="0"
-      :add-on-key="[13, 188, 186]"
-      :separators="[',', ';']"
-      :autocomplete-items="filteredItems"
-    />
-    <small
-      >Selected killchain: <code>{{ this.killchainName }}</code></small
+    <b-taginput
+      v-model="selectedPhases"
+      autocomplete
+      :data="autocompleteValues"
+      :open-on-focus="true"
+      :allow-new="false"
+      field="phase_name"
+      @typing="filteredItems"
+      :before-adding="tag => this.selectedPhases.filter(item => item.phase_name === tag.phase_name).length === 0"
     >
+    </b-taginput>
+    <small>
+      <b-taglist>
+        <b-tag v-for="kc in this.availableKillchains" v-bind:key="kc.name" type="is-info is-light">
+          {{ kc.name }}
+        </b-tag>
+      </b-taglist>
+    </small>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import VueTagsInput from "@johmun/vue-tags-input";
 
 export default {
   props: {
     value: { type: Array, default: () => [] },
     killchainName: { type: String }
   },
-  components: {
-    VueTagsInput
-  },
+  components: {},
   data() {
     return {
       item: "",
+      availableKillchains: [],
       autocompleteValues: [],
-      killchainPhases: this.value
+      autocompleteData: [],
+      selectedPhases: this.value
     };
   },
   methods: {
-    deletingPhase(event) {
-      for (var i in this.killchainPhases) {
-        if (
-          this.killchainPhases[i].phase_name === event.tag.text &&
-          this.killchainPhases[i].kill_chain_name === this.killchainName
-        ) {
-          this.killchainPhases.splice(i, 1);
-          event.deleteTag();
-          this.$emit("input", this.killchainPhases);
+    fetchKillchains() {
+      axios.get("/settings/killchains/").then(response => {
+        this.availableKillchains = response.data;
+        for (let killchain of this.availableKillchains) {
+          this.autocompleteData = this.autocompleteData.concat(
+            killchain.settings[killchain.name].map(phase => ({
+              phase_name: phase.name,
+              kill_chain_name: killchain.name
+            }))
+          );
+          this.autocompleteValues = this.autocompleteData;
         }
-      }
+      });
     },
-    addingPhase(event) {
-      event.addTag();
-      this.killchainPhases.push(
-        Object({
-          kill_chain_name: this.killchainName,
-          phase_name: event.tag.text
-        })
-      );
-      this.$emit("input", this.killchainPhases);
-    },
-    getKillchainPhases: function() {
-      axios.get("settings/killchains/" + this.killchainName + "/").then(response => {
-        if (response.status === 200) {
-          this.autocompleteValues = response.data.map(item => Object({ text: item.name }));
-        }
+    filteredItems(text) {
+      this.autocompleteValues = this.autocompleteData.filter(item => {
+        return item.phase_name.toLowerCase().indexOf(text.toLowerCase()) > -1;
       });
     }
   },
-  computed: {
-    filteredItems() {
-      return this.autocompleteValues.filter(item => new RegExp(this.item, "i").test(item.text));
-    },
-    listItems() {
-      return this.killchainPhases
-        .filter(item => item.kill_chain_name === this.killchainName)
-        .map(item => Object({ text: item["phase_name"] }));
-    }
-  },
   mounted() {
-    this.getKillchainPhases();
-    this.killchainPhases = this.value;
+    this.fetchKillchains();
+  },
+  watch: {
+    selectedPhases: function(val) {
+      this.$emit("input", val);
+    },
+    value: function(val) {
+      this.selectedPhases = val;
+    }
   }
 };
 </script>
