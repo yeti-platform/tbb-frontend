@@ -8,11 +8,13 @@
       :allow-new="false"
       field="phase_name"
       @typing="filteredItems"
-      :before-adding="tag => this.selectedPhases.filter(item => item.phase_name === tag.phase_name).length === 0"
+      :before-adding="tag => !phaseIsSelected(tag.phase_name)"
     >
       <template v-slot="props">
-        <b-tag>{{ availableKillchains.filter(kc => kc.name === props.option.kill_chain_name)[0].human_name }}</b-tag>
-        {{ props.option.phase_name }}
+        <span :class="{ disabled: phaseIsSelected(props.option.phase_name) }">
+          <b-tag>{{ availableKillchains.filter(kc => kc.name === props.option.kill_chain_name)[0].human_name }}</b-tag>
+          {{ props.option.phase_name }}
+        </span>
       </template>
     </b-taginput>
     <small>
@@ -59,6 +61,9 @@ export default {
         }
       });
     },
+    phaseIsSelected(phaseName) {
+      return this.selectedPhases.filter(item => item.phase_name === phaseName).length !== 0;
+    },
     filteredItems(text) {
       this.autocompleteValues = this.autocompleteData.filter(item => {
         return item.phase_name.toLowerCase().indexOf(text.toLowerCase()) > -1;
@@ -83,5 +88,9 @@ export default {
 small p {
   float: left;
   margin-right: 0.25rem;
+}
+
+span.disabled {
+  opacity: 0.5;
 }
 </style>
