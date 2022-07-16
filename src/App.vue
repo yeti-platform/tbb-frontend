@@ -23,11 +23,8 @@ import Sidebar from "@/components/scaffolding/Sidebar";
 import Navigation from "@/components/scaffolding/Navigation";
 import LogIn from "@/components/LogIn";
 import axios from "axios";
-axios.defaults.baseURL = "/api";
 
-// require("bootstrap");
-// require("bootstrap/dist/css/bootstrap.css");
-require("@fortawesome/fontawesome-free/js/all.js");
+axios.defaults.baseURL = "/api";
 
 export default {
   components: {
@@ -52,32 +49,6 @@ export default {
 };
 </script>
 
-<style>
-body {
-  font-size: 0.875rem;
-}
-
-.feather {
-  width: 16px;
-  height: 16px;
-  vertical-align: text-bottom;
-}
-
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.nav-pills .nav-link.router-link-active,
-.nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #007bff;
-}
-
-h1.yeti-title {
-  font-weight: 300;
-  font-size: 3rem;
-}
+<style lang="scss">
+@import "style.scss";
 </style>
