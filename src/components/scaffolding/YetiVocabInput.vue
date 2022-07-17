@@ -1,6 +1,14 @@
 <template>
   <div>
-    <b-taginput v-model="vocabList" placeholder="Add a tag"> </b-taginput>
+    <b-taginput
+      @typing="filteredItems"
+      autocomplete
+      :data="autocompleteValues"
+      v-model="vocabList"
+      placeholder="Add a vocab item"
+      field="text"
+    >
+    </b-taginput>
     <small v-if="autocompleteVocab" class="form-text text-muted">
       Autocompleting from <code>{{ autocompleteVocab }}</code>
     </small>
@@ -15,7 +23,8 @@ export default {
   props: ["value", "autocompleteVocab", "displayKey"],
   data() {
     return {
-      autocompleteItems: [],
+      autocompleteData: [],
+      autocompleteValues: [],
       vocabList: this.value
     };
   },
@@ -25,7 +34,8 @@ export default {
         .get("/settings/vocabs/" + this.autocompleteVocab + "/")
         .then(response => {
           if (response.status === 200) {
-            this.autocompleteItems = response.data.map(item => Object({ text: item }));
+            this.autocompleteData = response.data.map(item => Object({ text: item }));
+            this.autocompleteValues = this.autocompleteData;
           }
         })
         .catch(error => {
@@ -33,12 +43,18 @@ export default {
             console.log(`No vocab found for ${this.autocompleteVocab}: ${error}`);
           }
         });
+    },
+    filteredItems: function(text) {
+      if (text) {
+        this.autocompleteValues = this.autocompleteData.filter(
+          item => item.text.toLowerCase().indexOf(text.toLowerCase()) > -1
+        );
+      } else {
+        this.autocompleteValues = this.autocompleteData;
+      }
     }
   },
   computed: {
-    filteredItems() {
-      return this.autocompleteItems.filter(validTag => new RegExp(this.item, "i").test(validTag.text));
-    },
     listItems() {
       if (this.displayKey) {
         return (this.vocabList || []).map(item => Object({ text: item[this.displayKey] }));
