@@ -20,7 +20,7 @@ const typeToIcon = {
 };
 
 export default {
-  props: ["type", "large"],
+  props: ["type"],
 
   computed: {
     getIcon() {
