@@ -1,5 +1,5 @@
 <template lang="html">
-  <i :class="classArray"></i>
+  <b-icon pack="fa" :icon="getIcon" size="is-small">123</b-icon>
 </template>
 
 <script>
@@ -21,14 +21,10 @@ const typeToIcon = {
 
 export default {
   props: ["type", "large"],
-  data() {
-    return {
-      typeToIcon: typeToIcon
-    };
-  },
+
   computed: {
-    classArray() {
-      return ["fas", "fa-fw", typeToIcon[this.type], { "fa-lg": this.large }];
+    getIcon() {
+      return typeToIcon[this.type];
     }
   }
 };
