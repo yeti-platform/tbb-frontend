@@ -1,31 +1,8 @@
 <template>
   <div>
-    <ul class="nav nav-tabs mb-3" id="tabs-tab" role="tablist">
-      <li class="nav-item" v-for="(killchain, index) in nonEmptyKillChains" v-bind:key="killchain.name">
-        <a
-          class="nav-link"
-          :id="killchain.name + '-tab'"
-          data-toggle="pill"
-          :href="'#' + killchain.name"
-          v-bind:class="{ active: index === 0 }"
-          role="tab"
-          :aria-controls="killchain.name"
-          aria-selected="true"
-          >{{ killchain.human_name }}</a
-        >
-      </li>
-    </ul>
-    <div class="tab-content" id="pills-tabContent">
-      <div
-        v-for="(killchain, index) in nonEmptyKillChains"
-        v-bind:key="killchain.name"
-        class="tab-pane"
-        v-bind:class="{ active: index === 0 }"
-        :id="killchain.name"
-        role="tabpanel"
-        :aria-labelledby="killchain.name + '-tab'"
-      >
-        <table class="table">
+    <b-tabs :animated="false">
+      <b-tab-item v-for="killchain in nonEmptyKillChains" v-bind:key="killchain.name" :label="killchain.human_name">
+        <table class="table" style="width:100%">
           <tr v-for="phase in getPhases(killchain)" v-bind:key="phase.name">
             <th>{{ phase.human_name }}</th>
             <td
@@ -41,8 +18,8 @@
             </td>
           </tr>
         </table>
-      </div>
-    </div>
+      </b-tab-item>
+    </b-tabs>
   </div>
 </template>
 
