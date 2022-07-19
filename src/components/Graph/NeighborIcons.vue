@@ -1,8 +1,8 @@
 <template>
   <div class="neighbor-icons">
-    <div v-for="type in Object.keys(countByType)" v-bind:key="type" class="float-left mr-3 neighbor-icon-single">
+    <div v-for="type in Object.keys(countByType)" v-bind:key="type" class="neighbor-icon-single">
       <type-to-icon :type="type"></type-to-icon>
-      <span class="badge badge-pill badge-light"> {{ countByType[type] }}</span>
+      <span> {{ countByType[type] }}</span>
     </div>
   </div>
 </template>
@@ -54,7 +54,9 @@ export default {
 
 <style>
 .neighbor-icon-single {
-  min-width: 3em;
+  /* min-width: 3em; */
+  margin-right: 0.75em;
+  float: left;
 }
 
 .neighbor-icons {

@@ -27,14 +27,15 @@
       >
         <table class="table">
           <tr v-for="phase in getPhases(killchain)" v-bind:key="phase.name">
-            <th>{{ phase.name }}</th>
+            <th>{{ phase.human_name }}</th>
             <td
               class="neighbor-data"
               v-for="neighbor in neighborsPerKillchain[killchain.name][phase.name]"
               v-bind:key="killchain.name + phase.name + neighbor.id"
             >
               <router-link :to="{ name: 'EntityDetails', params: { id: neighbor.id } }">
-                <type-to-icon :type="neighbor.type"></type-to-icon>{{ neighbor.name }}
+                <type-to-icon :type="neighbor.type" class="neighbor-icon"></type-to-icon
+                ><span>{{ neighbor.name }}</span>
               </router-link>
               <neighbor-icons :entity="neighbor" :neighbors="extendedGraph"></neighbor-icons>
             </td>
@@ -116,8 +117,13 @@ export default {
         if (neighbor.kill_chain_phases === undefined) {
           return;
         }
+
         neighbor.kill_chain_phases.map(phase => {
-          this.neighborsPerKillchain[phase.kill_chain_name][phase.phase_name].push(neighbor);
+          if (this.neighborsPerKillchain[phase.kill_chain_name] === undefined) {
+            console.log(`Kill chain ${phase.kill_chain_name} not system; did you import it?`);
+          } else {
+            this.neighborsPerKillchain[phase.kill_chain_name][phase.phase_name].push(neighbor);
+          }
         });
       }
     }
@@ -136,4 +142,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.neighbor-icon {
+  margin-right: 0.25rem;
+}
+</style>
