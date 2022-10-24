@@ -6,13 +6,21 @@
         {{ "New " + entityTypeHuman.singular }}
       </b-button>
     </div>
-    <b-table :data="entities" :paginated="true" :per-page="20" :current-page.sync="currentPage" :loading="isLoading">
+    <b-table
+      :data="entities"
+      :paginated="true"
+      :per-page="20"
+      :current-page.sync="currentPage"
+      :loading="isLoading"
+      :debounce-search="300"
+    >
       <b-table-column
         v-for="field in columns"
         v-bind:key="field.field"
         :field="field.field"
         :label="field.label"
         v-slot="entity"
+        :searchable="field.field === 'name'"
       >
         <router-link v-if="field.field === 'name'" :to="{ name: 'EntityDetails', params: { id: entity.row.id } }">
           {{ entity.row[field.field] }}
