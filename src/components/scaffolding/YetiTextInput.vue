@@ -1,7 +1,15 @@
 <template>
   <div style="width:100%">
-    <b-input class="form-control" v-model="bufferValue" />
-    <small v-if="vocab" class="form-text text-muted"
+    <b-input v-if="fieldVocab.length == 0" v-model="bufferValue" />
+    <b-autocomplete
+      placeholder="Start typing..."
+      v-else
+      open-on-focus
+      v-model="bufferValue"
+      :data="filteredVocabValues"
+      clearable
+    ></b-autocomplete>
+    <small v-if="vocab"
       >Suggested values from <code>{{ vocab }}</code
       >: {{ fieldVocab.join(", ") }}</small
     >
@@ -37,6 +45,11 @@ export default {
     valueUpdated() {
       console.log("updated");
       this.$emit("input", this.bufferValue);
+    }
+  },
+  computed: {
+    filteredVocabValues() {
+      return this.fieldVocab.filter(item => item.toLowerCase().indexOf(this.bufferValue.toLowerCase()) > -1);
     }
   },
   mounted() {

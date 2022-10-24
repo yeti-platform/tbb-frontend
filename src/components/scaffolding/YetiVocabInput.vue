@@ -1,16 +1,20 @@
 <template>
   <div>
     <b-taginput
+      v-if="autocompleteVocab"
       @typing="filteredItems"
       autocomplete
       :data="autocompleteValues"
       v-model="vocabList"
-      placeholder="Add a vocab item"
+      placeholder="Add comma-separated list items..."
       field="text"
+      :open-on-focus="vocabList ? vocabList.length < 20 : false"
     >
     </b-taginput>
+
+    <b-taginput v-else v-model="vocabList" placeholder="Add comma-separated list items..." field="text"> </b-taginput>
     <small v-if="autocompleteVocab" class="form-text text-muted">
-      Autocompleting from <code>{{ autocompleteVocab }}</code>
+      Autocompleting items from <code>{{ autocompleteVocab }}</code>
     </small>
   </div>
 </template>
@@ -25,7 +29,7 @@ export default {
     return {
       autocompleteData: [],
       autocompleteValues: [],
-      vocabList: this.value
+      vocabList: this.value || []
     };
   },
   methods: {
