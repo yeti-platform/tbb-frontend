@@ -22,7 +22,7 @@ export default {
   methods: {
     getVocabValues() {
       axios
-        .get("/api/settings/vocabs/" + this.vocab + "/")
+        .get("/settings/vocabs/" + this.vocab + "/")
         .then(response => {
           if (response.status === 200) {
             this.fieldVocab = response.data;
