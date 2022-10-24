@@ -152,6 +152,7 @@ export const listFields = {
   malware: [
     { field: "name", type: "text", label: "Name" },
     { field: "labels", type: "list", vocab: "malware-label-ov", label: "Labels" },
+    { field: "is_family", type: "text", label: "Family?" },
     { field: "kill_chain_phases", type: "killchain", label: "Kill-chain stage" }
   ],
   "observed-data": [
@@ -192,12 +193,15 @@ export const listFields = {
 
 export const defaultObjects = {
   malware: {
+    spec_version: "2.1",
     name: "",
     labels: [],
     description: "",
+    is_family: true,
     type: "malware"
   },
   "threat-actor": {
+    spec_version: "2.1",
     name: "",
     labels: "",
     description: "",
@@ -212,19 +216,22 @@ export const defaultObjects = {
     type: "threat-actor"
   },
   report: {
+    spec_version: "2.1",
     name: "",
     labels: [],
     description: "",
-    published: "",
+    published: null,
     type: "report"
   },
   "attack-pattern": {
+    spec_version: "2.1",
     name: "",
     labels: [],
     kill_chain_phases: [],
     type: "attack-pattern"
   },
   tool: {
+    spec_version: "2.1",
     name: "",
     labels: [],
     description: "",
@@ -233,12 +240,13 @@ export const defaultObjects = {
     type: "tool"
   },
   "intrusion-set": {
+    spec_version: "2.1",
     name: "",
     labels: [],
     description: "",
     aliases: [],
-    first_seen: "",
-    last_seen: "",
+    first_seen: null,
+    last_seen: null,
     goals: [],
     resource_level: "",
     primary_motivation: "",
@@ -246,27 +254,31 @@ export const defaultObjects = {
     type: "intrusion-set"
   },
   vulnerability: {
+    spec_version: "2.1",
     name: "",
     labels: [],
     description: "",
     type: "vulnerability"
   },
   campaign: {
+    spec_version: "2.1",
     name: "",
     labels: [],
     aliases: [],
-    first_seen: "",
-    last_seen: "",
+    first_seen: null,
+    last_seen: null,
     objective: "",
     type: "campaign"
   },
   "course-of-action": {
+    spec_version: "2.1",
     name: "",
     labels: [],
     description: "",
     type: "course-of-action"
   },
   identity: {
+    spec_version: "2.1",
     name: "",
     labels: [],
     description: "",
@@ -276,6 +288,7 @@ export const defaultObjects = {
     type: "identity"
   },
   "x-incident": {
+    spec_version: "2.1",
     name: "",
     labels: [],
     description: "",

@@ -62,42 +62,46 @@ export const listFields = {
 
 export const defaultObjects = {
   indicator: {
+    spec_version: "2.1",
     name: "",
     labels: [],
     description: "",
     pattern: "",
-    valid_from: "",
-    valid_until: "",
+    valid_from: null,
+    valid_until: null,
     kill_chain_phases: [],
     type: "indicator"
   },
   "x-regex": {
+    spec_version: "2.1",
     name: "",
     labels: [],
     description: "",
     pattern: "",
-    valid_from: "",
-    valid_until: "",
+    valid_from: null,
+    valid_until: null,
     kill_chain_phases: [],
     type: "x-regex"
   },
   "x-yara": {
+    spec_version: "2.1",
     name: "",
     labels: [],
     description: "",
     pattern: "",
-    valid_from: "",
-    valid_until: "",
+    valid_from: null,
+    valid_until: null,
     kill_chain_phases: [],
     type: "x-yara"
   },
   "x-sigma": {
+    spec_version: "2.1",
     name: "",
     labels: [],
     description: "",
     pattern: "",
-    valid_from: "",
-    valid_until: "",
+    valid_from: null,
+    valid_until: null,
     kill_chain_phases: [],
     type: "x-sigma"
   }
