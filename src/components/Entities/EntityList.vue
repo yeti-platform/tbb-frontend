@@ -12,7 +12,7 @@
       :per-page="20"
       :current-page.sync="currentPage"
       :loading="isLoading"
-      :debounce-search="300"
+      :debounce-search="100"
     >
       <b-table-column
         v-for="field in columns"
