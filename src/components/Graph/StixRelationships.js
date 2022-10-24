@@ -40,7 +40,7 @@ export const relationships = {
   malware: {
     identity: ["targets"],
     vulnerability: ["targets"],
-    uses: ["tool"],
+    tool: ["uses"],
     malware: ["variant-of"]
   },
   "observed-data": {},
