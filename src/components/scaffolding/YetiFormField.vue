@@ -93,7 +93,11 @@ export default {
       return this.field.field.toLowerCase().replace(/[\s_]+|[^\w-]|^-+|-+$/g, "");
     },
     computedDateValue() {
-      return moment(this.bufferValue, "YYYY-MM-DD HH:mm:ss ZZ").toDate();
+      if (this.bufferValue) {
+        return moment(this.bufferValue, "YYYY-MM-DD HH:mm:ss ZZ").toDate();
+      } else {
+        return "";
+      }
     }
   },
   mounted() {
