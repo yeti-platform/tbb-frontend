@@ -46,14 +46,6 @@
     <!-- list-type input -->
     <yeti-vocab-input v-else-if="field.type === 'list'" v-model="bufferValue" :autocompleteVocab="field['vocab']" />
 
-    <!-- tag input -->
-    <yeti-vocab-input
-      v-else-if="field.type === 'tags'"
-      v-model="bufferValue"
-      displayKey="name"
-      :autocompleteVocab="field['vocab']"
-    />
-
     <!-- killchain input -->
     <yeti-killchain-input v-else-if="field.type === 'killchain'" v-model="bufferValue" />
 
