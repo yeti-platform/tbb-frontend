@@ -7,7 +7,6 @@
       :data="autocompleteValues"
       v-model="vocabList"
       placeholder="Add comma-separated list items..."
-      field="text"
       :open-on-focus="vocabList ? vocabList.length < 20 : false"
     >
     </b-taginput>
@@ -38,7 +37,7 @@ export default {
         .get("/settings/vocabs/" + this.autocompleteVocab + "/")
         .then(response => {
           if (response.status === 200) {
-            this.autocompleteData = response.data.map(item => Object({ text: item }));
+            this.autocompleteData = response.data;
             this.autocompleteValues = this.autocompleteData;
           }
         })
