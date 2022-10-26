@@ -50,7 +50,7 @@ export default {
     filteredItems: function(text) {
       if (text) {
         this.autocompleteValues = this.autocompleteData.filter(
-          item => item.text.toLowerCase().indexOf(text.toLowerCase()) > -1
+          item => item.toLowerCase().indexOf(text.toLowerCase()) > -1
         );
       } else {
         this.autocompleteValues = this.autocompleteData;
