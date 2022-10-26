@@ -11,7 +11,10 @@
       </h2>
       <h1 class="title">
         {{ indicator.name }}
-        <b-button tag="router-link" :to="{ name: 'IndicatorEdit', params: { id: id } }">Edit</b-button>
+        <div class="buttons">
+          <b-button tag="router-link" :to="{ name: 'IndicatorEdit', params: { id: id } }">Edit</b-button>
+          <b-button type="is-danger" @click="deleteIndicator(id)">Delete</b-button>
+        </div>
       </h1>
 
       <fields :field="{ type: 'list', field: 'labels' }" :elt="indicator" />
@@ -257,7 +260,6 @@ export default {
           }
         })
         .catch(error => {
-          // how do we catch 404 errors?
           this.error = error;
         })
         .finally(() => {
@@ -266,6 +268,27 @@ export default {
     },
     toggleEdit() {
       this.$router.push({ name: "IndicatorDetails", params: { id: this.id } });
+    },
+    deleteIndicator() {
+      if (!confirm("Are you sure?")) {
+        return;
+      }
+      this.loading = true;
+      axios
+        .delete(this.defaultApiPath + this.id)
+        .then(response => {
+          if (response.status !== 200) {
+            this.error = response.data;
+          } else {
+            this.$router.push({ name: "IndicatorList", params: { type: this.indicator.type } });
+          }
+        })
+        .catch(error => {
+          this.error = error;
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     },
     getSpecificProperties(indicator) {
       var properties = [];
